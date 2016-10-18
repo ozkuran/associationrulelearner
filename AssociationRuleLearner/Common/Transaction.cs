@@ -8,5 +8,11 @@ namespace Common
 {
     public class Transaction
     {
+        public Transaction()
+        {
+            Items = new List<Item>();
+        }
+
+        public List<Item> Items { get; set; }
     }
 }
