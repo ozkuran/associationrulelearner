@@ -19,7 +19,19 @@ namespace Common
             Name = itemName;
             Guid = Guid.NewGuid();
         }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Name.Equals(((Item)obj)?.Name);
+        }
+
         public string Name { get; set; }
         public Guid Guid { get; set; }
     }
+
 }
