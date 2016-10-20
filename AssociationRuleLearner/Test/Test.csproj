@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="UnitTestItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTestItemList.cs" />
     <Compile Include="UnitTestRule.cs" />
     <Compile Include="UnitTestTransactionDatabase.cs" />
   </ItemGroup>
