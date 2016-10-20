@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Test
 {
     [TestClass]
-    public class ItemUnitTests
+    public class UnitTestItem
     {
         [TestMethod]
         public void Item_Creation_Default_Constructor_Name()
