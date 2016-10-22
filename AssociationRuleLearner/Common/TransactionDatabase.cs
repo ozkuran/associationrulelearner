@@ -21,6 +21,7 @@ namespace Common
         }
 
         public List<Transaction> Transactions { get; set; }
+        public ItemList UniqueItems { get; set; }
 
         public void AddTransaction(Transaction transaction)
         {
