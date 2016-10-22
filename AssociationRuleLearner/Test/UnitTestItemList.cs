@@ -74,5 +74,57 @@ namespace Test
 
             Assert.IsNotNull(itemList.Items);
         }
+
+        [TestMethod]
+        public void Did_ItemListItems_Added_Correctly_With_AddItemsOfTransaction()
+        {
+            var itemList = new ItemList();
+            var transaction = new Transaction();
+            transaction.Items.Add(new Item("A"));
+            transaction.Items.Add(new Item("B"));
+            transaction.Items.Add(new Item("C"));
+            transaction.Items.Add(new Item("D"));
+            transaction.Items.Add(new Item("E"));
+            itemList.AddItemsOfTransaction(transaction);
+
+            Assert.IsTrue(itemList.IsItemPresent(new Item("A"))&& itemList.IsItemPresent(new Item("B")) && itemList.IsItemPresent(new Item("C")) && itemList.IsItemPresent(new Item("D")) && itemList.IsItemPresent(new Item("E")), "All added items are found in the list");
+        }
+
+
+        [TestMethod]
+        public void Did_ItemListItems_IsItemPresent_True()
+        {
+            var itemList = new ItemList();
+            itemList.Items.Add(new Item("A"));
+            itemList.Items.Add(new Item("B"));
+
+            Assert.IsTrue(itemList.IsItemPresent(new Item("A")), "Present item detected as non-present");
+        }
+
+        [TestMethod]
+        public void Did_ItemListItems_IsItemPresent_False()
+        {
+            var itemList = new ItemList();
+            itemList.Items.Add(new Item("A"));
+            itemList.Items.Add(new Item("B"));
+
+            Assert.IsFalse(itemList.IsItemPresent(new Item("C")),"Non-present item detected as present");
+        }
+
+        [TestMethod]
+        public void Did_ItemListItems_Added_Correctly_With_AddItemsOfTransaction_Did_Only_Unique_Items_Added_To_ItemList()
+        {
+            var itemList = new ItemList();
+            var transaction = new Transaction();
+            transaction.Items.Add(new Item("A"));
+            transaction.Items.Add(new Item("B"));
+            transaction.Items.Add(new Item("C"));
+            transaction.Items.Add(new Item("D"));
+            transaction.Items.Add(new Item("E"));
+            transaction.Items.Add(new Item("E"));
+            itemList.AddItemsOfTransaction(transaction);
+
+            Assert.AreEqual(itemList.Items.Count, 5, "Amount of Transaction Items Added Correctly");
+        }
     }
 }
