@@ -22,5 +22,14 @@ namespace Test
 
             Assert.IsNotNull(transactions.Transactions, "transactions.Transactions != null");
         }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_Loaded_From_Comma_Seperated_File()
+        {
+            var transactions = new TransactionDatabase(@"sample.txt");
+
+            Assert.IsNotNull(transactions.Transactions, "transactions.Transactions != null");
+
+        }
     }
 }
