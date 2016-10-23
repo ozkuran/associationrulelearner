@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using Common;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -31,5 +32,19 @@ namespace Test
             Assert.IsNotNull(transactions.Transactions, "transactions.Transactions != null");
 
         }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_GetMaxTransactionLength_Returns_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction("A,B,C,D"));
+            transactions.AddTransaction(new Transaction("A,B,C,D,A"));
+            transactions.AddTransaction(new Transaction("A,B"));
+            transactions.AddTransaction(new Transaction("A,B,C"));
+
+            Assert.AreEqual(5,transactions.GetMaxTransactionLength(), "GetMaxTransactionLength is not equals to 5");
+
+        }
+
     }
 }

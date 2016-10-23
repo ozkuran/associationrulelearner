@@ -23,6 +23,7 @@ namespace Common
         public List<Transaction> Transactions { get; set; }
         public ItemList UniqueItems { get; set; }
 
+
         public void AddTransaction(Transaction transaction)
         {
             Transactions.Add(transaction);
@@ -36,6 +37,11 @@ namespace Common
                 var transaction = new Transaction(line);
                 AddTransaction(transaction);
             }
+        }
+
+        public int GetMaxTransactionLength()
+        {
+            return Transactions.Select(transaction => transaction.Items.Count).Concat(new[] {0}).Max();
         }
     }
 }
