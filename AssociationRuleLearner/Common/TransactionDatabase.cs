@@ -43,5 +43,15 @@ namespace Common
         {
             return Transactions.Select(transaction => transaction.Items.Count).Concat(new[] {0}).Max();
         }
+
+        public double GetSupportOfTransaction(Transaction transaction)
+        {
+            double support = 0;
+            foreach (Transaction transaction1 in Transactions)
+            {
+                
+            }
+            return support;
+        }
     }
 }

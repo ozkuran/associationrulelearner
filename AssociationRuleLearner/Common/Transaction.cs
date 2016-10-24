@@ -24,5 +24,30 @@ namespace Common
         }
 
         public List<Item> Items { get; set; }
+
+
+        public bool ContainsItem(Item item)
+        {
+            bool contains = false;
+            foreach (Item item1 in Items)
+            {
+                if (Equals(item, item1))
+                {
+                    contains = true;
+                }
+            }
+            return contains;
+
+        }
+
+        public bool Contains(Transaction transaction)
+        {
+            bool contains = true;
+            foreach (Item item in transaction.Items)
+            {
+                contains = contains && ContainsItem(item);
+            }
+            return contains;
+        }
     }
 }
