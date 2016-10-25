@@ -57,5 +57,17 @@ namespace Test
             Assert.AreEqual(0.75, support, "GetSupportOfTransaction is not equals to 0.75");
         }
 
+        [TestMethod]
+        public void Did_TransactionDatabase_Confidence_Returns_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction("A,B,C,D"));
+            transactions.AddTransaction(new Transaction("A,B,C,A"));
+            transactions.AddTransaction(new Transaction("A,B"));
+            transactions.AddTransaction(new Transaction("A,B,C"));
+            var support = transactions.GetConfidenceOfTransactions(new Transaction("A,B"), new Transaction("D"));
+            Assert.AreEqual(0.25, support, "GetSupportOfTransaction is not equals to 0.25");
+        }
+
     }
 }
