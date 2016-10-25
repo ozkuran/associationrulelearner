@@ -46,11 +46,15 @@ namespace Common
 
         public double GetSupportOfTransaction(Transaction transaction)
         {
-            double support = 0;
+            int containedTransaction = 0;
             foreach (Transaction transaction1 in Transactions)
             {
-                
+                if (transaction1.Contains(transaction))
+                {
+                    containedTransaction++;
+                }
             }
+            var support = (double)(containedTransaction)/(double)(Transactions.Count);
             return support;
         }
     }

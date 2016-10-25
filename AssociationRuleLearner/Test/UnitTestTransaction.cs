@@ -82,7 +82,6 @@ namespace Test
             Assert.IsTrue(transaction1.Contains(transaction2), "Did not find contained Transaction in the Transaction");
         }
 
-
         [TestMethod]
         public void Did_Transaction_Detects_NonContained_Tranaction_Correctly()
         {
