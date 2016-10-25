@@ -67,6 +67,10 @@ namespace Test
             transactions.AddTransaction(new Transaction("A,B,C"));
             var support = transactions.GetConfidenceOfTransactions(new Transaction("A,B"), new Transaction("D"));
             Assert.AreEqual(0.25, support, "GetSupportOfTransaction is not equals to 0.25");
+
+            support = transactions.GetConfidenceOfTransactions(new Transaction("A,B"), new Transaction("A,B"));
+            Assert.AreEqual(1, support, "GetSupportOfTransaction is not equals to 1");
+
         }
 
     }
