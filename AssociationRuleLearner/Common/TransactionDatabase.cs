@@ -57,5 +57,27 @@ namespace Common
             var support = (double)(containedTransaction)/(double)(Transactions.Count);
             return support;
         }
+
+        public double GetConfidenceOfTransactions(Transaction transaction1, Transaction transaction2)
+        {
+            int containedTransaction = 0;
+            List<Transaction> filteredTransactions = new List<Transaction>();
+            foreach (Transaction transaction3 in Transactions)
+            {
+                if (transaction3.Contains(transaction1))
+                {
+                    filteredTransactions.Add(transaction3);
+                }
+            }
+            foreach (Transaction transaction3 in filteredTransactions)
+            {
+                if (transaction3.Contains(transaction2))
+                {
+                    containedTransaction++;
+                }
+            }
+            var support = (double)(containedTransaction) / (double)(filteredTransactions.Count);
+            return support;
+        }
     }
 }
