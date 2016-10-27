@@ -79,5 +79,11 @@ namespace Common
             var support = (double)(containedTransaction) / (double)(filteredTransactions.Count);
             return support;
         }
+
+        public double GetLiftOfTransactions(Transaction transaction1, Transaction transaction2)
+        {
+            var support = GetSupportOfTransaction(transaction1 + transaction2) / (GetSupportOfTransaction(transaction1) * GetSupportOfTransaction(transaction2));
+            return support;
+        }
     }
 }

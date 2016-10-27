@@ -73,5 +73,21 @@ namespace Test
 
         }
 
+        [TestMethod]
+        public void Did_TransactionDatabase_Lift_Returns_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction("A,B,C,D"));
+            transactions.AddTransaction(new Transaction("A,B,C,A"));
+            transactions.AddTransaction(new Transaction("A,B"));
+            transactions.AddTransaction(new Transaction("A,B,C"));
+            var lift = transactions.GetLiftOfTransactions(new Transaction("A,B"), new Transaction("D"));
+            Assert.AreEqual(1, lift, "GetLiftOfTransaction is not equals to 0.25");
+
+            lift = transactions.GetLiftOfTransactions(new Transaction("A,B"), new Transaction("A,B"));
+            Assert.AreEqual(1, lift, "GetLiftOfTransaction is not equals to 1");
+
+        }
+
     }
 }

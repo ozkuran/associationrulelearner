@@ -23,6 +23,11 @@ namespace Common
             }
         }
 
+        public Transaction(List<Item> itemList) : this()
+        {
+            Items.AddRange(itemList);
+        }
+
         public List<Item> Items { get; set; }
 
 
@@ -48,6 +53,13 @@ namespace Common
                 contains = contains && ContainsItem(item);
             }
             return contains;
+        }
+
+        public static Transaction operator +(Transaction transaction1, Transaction transaction2)
+        {
+            Transaction t1 = new Transaction(transaction1.Items);
+            t1.Items.AddRange(transaction2.Items);
+            return t1;
         }
     }
 }
