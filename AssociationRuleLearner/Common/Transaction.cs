@@ -18,7 +18,8 @@ namespace Common
             var items = line.Split(',');
             foreach (var item in items)
             {
-                var transactionItem = new Item(item); 
+                if (item.Trim() == "") continue;
+                var transactionItem = new Item(item);
                 Items.Add(transactionItem);
             }
         }
@@ -29,6 +30,7 @@ namespace Common
         }
 
         public List<Item> Items { get; set; }
+        public double Support { get; set; }
 
 
         public bool ContainsItem(Item item)
@@ -60,6 +62,11 @@ namespace Common
             Transaction t1 = new Transaction(transaction1.Items);
             t1.Items.AddRange(transaction2.Items);
             return t1;
+        }
+
+        public override string ToString()
+        {
+            return string.Join(",",Items);
         }
     }
 }

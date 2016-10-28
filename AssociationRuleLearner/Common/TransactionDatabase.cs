@@ -24,6 +24,15 @@ namespace Common
         public List<Transaction> Transactions { get; set; }
         public ItemList UniqueItems { get; set; }
 
+        public override string ToString()
+        {
+            string outputString = "";
+            foreach (Transaction transaction in Transactions)
+            {
+                outputString += transaction.ToString() + Environment.NewLine;
+            }
+            return outputString;
+        }
 
         public void AddTransaction(Transaction transaction)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    public class Item
+    public class Item : IComparable
     {
         public Item()
         {
@@ -34,6 +34,16 @@ namespace Common
         public override string ToString()
         {
             return Name.ToString();
+        }
+
+        public int CompareTo(object obj)
+        {
+            if (obj == null) return 1;
+            Item otherItem = obj as Item;
+            if (otherItem != null)
+                return string.Compare(this.Name, otherItem.Name, StringComparison.Ordinal);
+            else
+                throw new ArgumentException("Object is not an Item");
         }
 
         public string Name { get; set; }
