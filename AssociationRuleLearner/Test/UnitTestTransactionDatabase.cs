@@ -103,5 +103,18 @@ namespace Test
             Assert.AreEqual(double.NaN, conviction, "GetConvictionOfTransactions is not equals to NaN");
         }
 
+        [TestMethod]
+        public void Did_TransactionDatabase_CreateUniqueItemList_Populates_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction("A,B,C,D"));
+            transactions.AddTransaction(new Transaction("A,B,C,A"));
+            transactions.AddTransaction(new Transaction("A,B"));
+            transactions.AddTransaction(new Transaction("A,B,C"));
+            transactions.CreateUniqueItemsList();
+            Assert.AreEqual(4, transactions.UniqueItems.Items.Count, "UniqueItemsList populates incorrectly");
+        }
+
+
     }
 }

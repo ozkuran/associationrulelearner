@@ -13,6 +13,7 @@ namespace Common
         public TransactionDatabase()
         {
             Transactions = new List<Transaction>();
+            UniqueItems = new ItemList();
         }
 
         public TransactionDatabase(string fileName) : this()
@@ -74,6 +75,14 @@ namespace Common
         {
             var support = (1 - GetSupportOfTransaction(transaction2)) / (1 - GetConfidenceOfTransactions(transaction1, transaction2));
             return support;
+        }
+
+        public void CreateUniqueItemsList()
+        {
+            foreach (Transaction transaction in Transactions)
+            {
+                UniqueItems.AddItemsOfTransaction(transaction);
+            }
         }
     }
 }
