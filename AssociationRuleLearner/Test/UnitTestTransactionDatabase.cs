@@ -86,7 +86,21 @@ namespace Test
 
             lift = transactions.GetLiftOfTransactions(new Transaction("A,B"), new Transaction("A,B"));
             Assert.AreEqual(1, lift, "GetLiftOfTransaction is not equals to 1");
+        }
 
+        [TestMethod]
+        public void Did_TransactionDatabase_Conviction_Returns_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction("A,B,C,D"));
+            transactions.AddTransaction(new Transaction("A,B,C,A"));
+            transactions.AddTransaction(new Transaction("A,B"));
+            transactions.AddTransaction(new Transaction("A,B,C"));
+            var conviction = transactions.GetConvictionOfTransactions(new Transaction("A,B"), new Transaction("D"));
+            Assert.AreEqual(1, conviction, "GetConvictionOfTransactions is not equals to 1");
+
+            conviction = transactions.GetConvictionOfTransactions(new Transaction("A,B"), new Transaction("A,B"));
+            Assert.AreEqual(double.NaN, conviction, "GetConvictionOfTransactions is not equals to NaN");
         }
 
     }

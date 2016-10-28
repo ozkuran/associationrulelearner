@@ -69,5 +69,11 @@ namespace Common
             var support = GetSupportOfTransaction(transaction1 + transaction2) / (GetSupportOfTransaction(transaction1) * GetSupportOfTransaction(transaction2));
             return support;
         }
+
+        public double GetConvictionOfTransactions(Transaction transaction1, Transaction transaction2)
+        {
+            var support = (1 - GetSupportOfTransaction(transaction2)) / (1 - GetConfidenceOfTransactions(transaction1, transaction2));
+            return support;
+        }
     }
 }
