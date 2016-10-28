@@ -56,5 +56,15 @@ namespace Test
             Assert.AreEqual(1, hashSet.Count, "Hashset added two Items with same name!");
         }
 
+
+        [TestMethod]
+        public void Did_Item_ToString_Works_Correct()
+        {
+            var item = new Item("A");
+
+            // Assert
+            Assert.AreEqual("A", item.ToString(), "Item.ToString() did not work correct!");
+        }
+
     }
 }

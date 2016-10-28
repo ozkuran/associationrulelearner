@@ -31,6 +31,11 @@ namespace Common
             return Name.Equals(((Item)obj)?.Name);
         }
 
+        public override string ToString()
+        {
+            return Name.ToString();
+        }
+
         public string Name { get; set; }
         public Guid Guid { get; set; }
     }
