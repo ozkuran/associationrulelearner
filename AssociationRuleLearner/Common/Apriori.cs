@@ -38,7 +38,7 @@ namespace Common
             string outputString = "";
             foreach (Transaction transaction in SupportedTransactionsList)
             {
-                outputString += transaction.ToString() + " " + $"{transaction.Support:0.00}" + Environment.NewLine;
+                outputString += transaction.ToString() + $" Support : {transaction.Support:0.00} " + Environment.NewLine;
             }
             return outputString;
         }
@@ -89,7 +89,7 @@ namespace Common
             }
             return transactions;
         }
-
+        
         private List<Transaction> GenerateCandidates(List<Item> items, int transactionLength)
         {
             var transactionList = new List<Transaction>();
