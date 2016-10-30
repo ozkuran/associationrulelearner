@@ -93,5 +93,32 @@ namespace Common
                 UniqueItems.AddItemsOfTransaction(transaction);
             }
         }
+
+        public void CreateRandomTransactionDatabase(int databaseSize)
+        {
+            for (var i = 0; i < databaseSize; i++)
+            {
+                Transactions.Add(GenerateRandomTransaction()); 
+            }
+        }
+
+        protected virtual Transaction GenerateRandomTransaction()
+        {
+            var rnd = new Random();
+            int itemCount = rnd.Next(9);
+            string items = "";
+            for (int i = 0; i < itemCount; i++)
+            {
+                items += GetRandomCharacter("QWERTYUIOPASDFGHJKLZXCVBNM");
+            }
+            return new Transaction(string.Join(items, ","));
+        }
+
+        private static char GetRandomCharacter(string text)
+        {
+            var rnd = new Random();
+            var index = rnd.Next(text.Length);
+            return text[index];
+        }
     }
 }

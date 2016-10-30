@@ -115,6 +115,13 @@ namespace Test
             Assert.AreEqual(4, transactions.UniqueItems.Items.Count, "UniqueItemsList populates incorrectly");
         }
 
+        [TestMethod]
+        public void Did_TransactionDatabase_CreateRandomTransactionDatabase_Populates_Correct_Amount_of_Element()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.CreateRandomTransactionDatabase(10);
+            Assert.AreEqual(10, transactions.Transactions.Count, "CreateRandomTransactionDatabase populates incorrect amount of Transactions");
+        }
 
     }
 }
