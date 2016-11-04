@@ -117,8 +117,11 @@ namespace Common
             return length == 0 ? new[] { new T[0] } :
               list.SelectMany((e, i) =>
                 GetCombinations(list.Skip(i + 1), length - 1).Select(c => (new[] { e }).Concat(c)));
-
         }
 
+        public bool IsTransactionSupported(Transaction transaction)
+        {
+            return SupportedTransactionsList.Any(transaction1 => transaction == transaction1);
+        }
     }
 }

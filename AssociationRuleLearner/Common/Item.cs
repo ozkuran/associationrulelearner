@@ -26,6 +26,16 @@ namespace Common
             return Name.GetHashCode();
         }
 
+        public static bool operator ==(Item item1, Item item2)
+        {
+            return item1?.Name == item2?.Name;
+        }
+
+        public static bool operator !=(Item item1, Item item2)
+        {
+            return !(item1 == item2);
+        }
+
         public override bool Equals(object obj)
         {
             return Name.Equals(((Item)obj)?.Name);
