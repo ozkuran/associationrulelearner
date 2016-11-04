@@ -104,13 +104,6 @@ namespace GUI
         }
         #endregion
 
-        private void AboutBoxGUI_Load(object sender, EventArgs e)
-        {
-            //labelVersion.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString(4);
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fileVersionInfo = FileVersionInfo.GetVersionInfo(assembly.Location);
-            labelVersion.Text = fileVersionInfo.ProductVersion;
-        }
 
         private void okButton_Click(object sender, EventArgs e)
         {
