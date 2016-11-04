@@ -31,6 +31,7 @@ namespace Common
 
         public List<Item> Items { get; set; }
         public double Support { get; set; }
+        public int Id { get; set; }
 
         public bool ContainsItem(Item item)
         {
