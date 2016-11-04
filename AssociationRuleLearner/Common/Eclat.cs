@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace Common
         {
             TransactionDatabase = transactionDatabase;
             MinimumSupport = minimumSupport;
+            MinimumRequiredTransaction = (int)(Math.Ceiling(transactionDatabase.Transactions.Count * MinimumSupport));
             CalculateSupport = calculateSupport;
             CalculateConfidence = calculateConfidence;
             CalculateLift = calculateLift;
@@ -25,6 +27,7 @@ namespace Common
 
         public TransactionDatabase TransactionDatabase { get; set; }
         public double MinimumSupport { get; set; }
+        public int MinimumRequiredTransaction { get; set; }
         public bool CalculateSupport { get; set; }
         public bool CalculateConfidence { get; set; }
         public bool CalculateLift { get; set; }
