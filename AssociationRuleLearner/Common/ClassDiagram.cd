@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Common.Apriori">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAABAAIEAAGAAEAEAAAAAAQEAIAAAAAAAAAAEI=</HashCode>
+      <FileName>Apriori.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Item" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQEgAAAAAQAAAAABIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Item.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Common.ItemList">
+    <Position X="3.25" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAACAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>ItemList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Rule">
+    <Position X="5.5" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAIAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Rule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.Transaction">
+    <Position X="5.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAEQAAAAAAAAAAAAAgCAAAAAAAQAAA=</HashCode>
+      <FileName>Transaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Common.TransactionDatabase">
+    <Position X="8" Y="0.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AACAAAACASAAEAAEAABAAAAAAAAAAAAAJAJAQAgAAAA=</HashCode>
+      <FileName>TransactionDatabase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
