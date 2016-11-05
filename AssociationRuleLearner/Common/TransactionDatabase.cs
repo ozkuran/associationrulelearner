@@ -45,6 +45,7 @@ namespace Common
             foreach (var line in lines)
             {
                 var transaction = new Transaction(line);
+                transaction.Id = Transactions.Count;
                 AddTransaction(transaction);
             }
         }

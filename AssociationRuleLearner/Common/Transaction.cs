@@ -31,6 +31,7 @@ namespace Common
 
         public List<Item> Items { get; set; }
         public double Support { get; set; }
+        public int Id { get; set; }
 
         public bool ContainsItem(Item item)
         {
@@ -62,6 +63,34 @@ namespace Common
             t1.Items.AddRange(transaction2.Items);
             return t1;
         }
+
+        public override bool Equals(object obj)
+        {
+            bool itemsEqual = true;
+            var enumerable = ((Transaction)obj)?.Items;
+            if (enumerable == null) return base.Equals(obj);
+            foreach (var item in enumerable)
+            {
+                if (!Items.Contains(item))
+                {
+                    itemsEqual = false;
+                }
+            }
+            return itemsEqual;
+        }
+
+        public static bool operator ==(Transaction transaction1, Transaction transaction2)
+        {
+            var notSecond = transaction1?.Items.Except(transaction2?.Items).ToList();
+            var notFirst = transaction2?.Items.Except(transaction1?.Items).ToList();
+            return !notSecond.Any() && !notFirst.Any();
+        }
+
+        public static bool operator !=(Transaction transaction1, Transaction transaction2)
+        {
+            return !(transaction1 == transaction2);
+        }
+
 
         public override string ToString()
         {
