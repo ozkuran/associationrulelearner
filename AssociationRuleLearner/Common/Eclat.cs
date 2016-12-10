@@ -35,5 +35,7 @@ namespace Common
         public List<Transaction> SupportedTransactionsList { get; set; }
         public List<Transaction> UnSupportedTransactionsList { get; set; }
 
+        //public List<Int>
+
     }
 }

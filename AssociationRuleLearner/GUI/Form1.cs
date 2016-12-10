@@ -23,8 +23,9 @@ namespace GUI
 
         private void aprioriAlgorithmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var transactions = new TransactionDatabase(@"sample.txt");
-            var apriori = new Apriori(transactions);
+            //var transactions = new TransactionDatabase(@"sample.txt");
+            var transactions = new TransactionDatabase(@"groceries.csv");
+            var apriori = new Apriori(transactions,0.01);
             apriori.Run();
             textBoxTransactions.Text = transactions.ToString();
             textBoxAssociations.Text = apriori.ToString();
