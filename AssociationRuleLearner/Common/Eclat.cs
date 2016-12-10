@@ -23,6 +23,7 @@ namespace Common
             CalculateConfidence = calculateConfidence;
             CalculateLift = calculateLift;
             CalculateConviction = calculateConviction;
+            ItemsTransactionLists = new List<ItemsTransactionList>();
         }
 
         public TransactionDatabase TransactionDatabase { get; set; }
@@ -35,7 +36,185 @@ namespace Common
         public List<Transaction> SupportedTransactionsList { get; set; }
         public List<Transaction> UnSupportedTransactionsList { get; set; }
 
-        //public List<Int>
+        public List<ItemsTransactionList> ItemsTransactionLists { get; set; }
+
+        public void Run()
+        {
+            TransactionDatabase.CreateUniqueItemsList();
+            SupportedTransactionsList = new List<Transaction>();
+            UnSupportedTransactionsList = new List<Transaction>();
+            List<ItemsTransactionList> uniqueItemsTransactionLists = new List<ItemsTransactionList>();
+            List<ItemsTransactionList> tempUniqueItemsTransactionLists = new List<ItemsTransactionList>();
+            foreach (Item uniqueItem in TransactionDatabase.UniqueItems.Items)
+            {
+                ItemsTransactionList itemsTransactionList = new ItemsTransactionList();
+                itemsTransactionList.ItemList = new ItemList();
+                itemsTransactionList.ItemList.Items.Add(uniqueItem);
+                itemsTransactionList.AddTransactionsToList(GetTransactionsContainsItemList(itemsTransactionList.ItemList));
+                if (TransactionDatabase.GetSupportOfTransaction(new Transaction(uniqueItem)) >= MinimumSupport)
+                {
+                    ItemsTransactionLists.Add(itemsTransactionList);
+                    uniqueItemsTransactionLists.Add(itemsTransactionList);
+                }
+            }
+
+            int maxItemCount = 1;
+            HashSet<Item> temporaryItems = new HashSet<Item>();
+            List<Transaction> temporaryTransactions = new List<Transaction>();
+            while (true)
+            {
+                temporaryItems.Clear();
+                temporaryTransactions.Clear();
+                tempUniqueItemsTransactionLists.Clear();
+                List<ItemsTransactionList> tmpItemsTransactionLists = new List<ItemsTransactionList>();
+
+                foreach (ItemsTransactionList itemsTransactionList in ItemsTransactionLists)
+                {
+                    if (itemsTransactionList.ItemList.Items.Count == maxItemCount)
+                    {
+                        tmpItemsTransactionLists.Add(itemsTransactionList);
+                    }
+                }
+                foreach (ItemsTransactionList tmpItemsTransactionList in tmpItemsTransactionLists)
+                {
+                    foreach (Item item in tmpItemsTransactionList.ItemList.Items)
+                    {
+                        temporaryItems.Add(item);
+                    }
+                }
+
+                foreach (ItemsTransactionList itemsTransactionList in uniqueItemsTransactionLists)
+                {
+                    foreach (Item temporaryItem in temporaryItems)
+                    {
+                        if (itemsTransactionList.ItemList.Items.First() == temporaryItem)
+                        {
+                            tempUniqueItemsTransactionLists.Add(itemsTransactionList);                            
+                        }
+                    }
+                }
+
+                List<ItemsTransactionList> candidateTransactions = GenerateCandidates(tempUniqueItemsTransactionLists.ToList(), maxItemCount);
+                if (candidateTransactions.Count == 0)
+                {
+                    break;
+                }
+                foreach (ItemsTransactionList tmpItemsTransactionList in candidateTransactions)
+                {
+                    ItemsTransactionLists.Add(tmpItemsTransactionList);
+                }
+                maxItemCount++;
+            }
+        }
+
+        private List<Transaction> GetTransactionsContainsTransaction(Transaction transaction)
+        {
+            List<Transaction> transactionsList = new List<Transaction>();
+            foreach (Transaction transactionDatabaseTransaction in TransactionDatabase.Transactions)
+            {
+                if (transactionDatabaseTransaction.Contains(transaction))
+                {
+                    transactionsList.Add(transactionDatabaseTransaction);
+                }
+            }
+            return transactionsList;
+        }
+
+        private List<Transaction> GetTransactionsContainsItemList(ItemList itemList)
+        {
+            List<Transaction> transactionsList = new List<Transaction>();
+            foreach (Transaction transactionDatabaseTransaction in TransactionDatabase.Transactions)
+            {
+                if (transactionDatabaseTransaction.Contains(new Transaction(itemList)))
+                {
+                    transactionsList.Add(transactionDatabaseTransaction);
+                }
+            }
+            return transactionsList;
+        }
+
+        private List<ItemsTransactionList> GenerateCandidates(List<ItemsTransactionList> items, int transactionLength)
+        {
+            var result = new List<ItemsTransactionList>();
+            var x = GetCombinations(items.AsEnumerable(), transactionLength + 1);
+            foreach (var enumerable in x)
+            {
+                var itemsTransactionList = new ItemsTransactionList();
+                bool first = true;
+                foreach (var item in enumerable)
+                {
+                    foreach (Item itemListItem in item.ItemList.Items)
+                    {
+                        itemsTransactionList.ItemList.Items.Add(itemListItem);
+                    }
+                    if (first)
+                    {
+                        foreach (Transaction transaction in item.Transactions)
+                        {
+                            itemsTransactionList.Transactions.Add(transaction);
+                        }
+                    }
+                    else
+                    {
+                        List<Transaction> tmpTransactionList = new List<Transaction>();
+                        foreach (Transaction transaction in itemsTransactionList.Transactions)
+                        {
+                            if (!item.Transactions.Contains(transaction))
+                            {
+                                tmpTransactionList.Add(transaction);
+                            }
+                        }
+                        foreach (Transaction transaction in tmpTransactionList)
+                        {
+                            itemsTransactionList.Transactions.Remove(transaction);
+                        }
+                    }
+                    first = false;
+                }
+                if (((double)itemsTransactionList.Transactions.Count / (double)TransactionDatabase.Transactions.Count)>= MinimumSupport)
+                {
+                    result.Add(itemsTransactionList);
+                }
+            }
+            return result;
+        }
+
+        public ItemsTransactionList CombineItemsTransactionList(ItemsTransactionList itemsTransactionList1,
+            ItemsTransactionList itemsTransactionList2)
+        {
+            itemsTransactionList1.ItemList.AddItemsOfTransaction(new Transaction(
+                itemsTransactionList2.ItemList));
+            foreach (Transaction transaction in itemsTransactionList1.Transactions)
+            {
+                if (!itemsTransactionList2.Transactions.Contains(transaction))
+                {
+                    itemsTransactionList1.Transactions.Remove(transaction);
+                }
+            }
+            return itemsTransactionList1;
+        }
+
+        public override string ToString()
+        {
+            string outputString = "";
+            foreach (ItemsTransactionList itemsTransactionList in ItemsTransactionLists)
+            {
+                Transaction transaction = new Transaction();
+                foreach (Item item in itemsTransactionList.ItemList.Items)
+                {
+                    transaction.Items.Add(item);
+                }
+                outputString += transaction.ToString() + $" Support : {TransactionDatabase.GetSupportOfTransaction(transaction):0.00} " + Environment.NewLine;
+            }
+            return outputString;
+        }
+
+        private static IEnumerable<IEnumerable<T>> GetCombinations<T>(IEnumerable<T> list, int length)
+        {
+            return length == 0 ? new[] { new T[0] } :
+              list.SelectMany((e, i) =>
+                GetCombinations(list.Skip(i + 1), length - 1).Select(c => (new[] { e }).Concat(c)));
+        }
 
     }
 }

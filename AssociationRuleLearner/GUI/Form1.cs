@@ -25,7 +25,7 @@ namespace GUI
         {
             //var transactions = new TransactionDatabase(@"sample.txt");
             var transactions = new TransactionDatabase(@"groceries.csv");
-            var apriori = new Apriori(transactions,0.01);
+            var apriori = new Apriori(transactions,0.02);
             apriori.Run();
             textBoxTransactions.Text = transactions.ToString();
             textBoxAssociations.Text = apriori.ToString();
@@ -35,6 +35,16 @@ namespace GUI
         {
             AboutBoxGUI about = new AboutBoxGUI();
             about.Show();
+        }
+
+        private void eCLATAlgorithmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //var transactions = new TransactionDatabase(@"sample.txt");
+            var transactions = new TransactionDatabase(@"groceries.csv");
+            var eclat = new Eclat(transactions, 0.02);
+            eclat.Run();
+            textBoxTransactions.Text = transactions.ToString();
+            textBoxAssociations.Text = eclat.ToString();
         }
     }
 }

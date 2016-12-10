@@ -10,19 +10,39 @@ namespace Common
     {
         public ItemsTransactionList()
         {
-            TransactionIds = new HashSet<int>();
+            Transactions = new HashSet<Transaction>();
+            ItemList = new ItemList();
         }
 
-        public HashSet<int> TransactionIds { get; set; }
+        public ItemsTransactionList(ItemList itemList)
+        {
+            foreach (Item item in itemList.Items)
+            {
+                ItemList.Items.Add(item);
+            }
+        }
+
+        public HashSet<Transaction> Transactions { get; set; }
         public ItemList ItemList { get; set; }
 
-        public void AddTransactionsToList(TransactionDatabase transactionDatabase)
+        public void AddTransactionsToList(List<Transaction> transactions)
+        {
+            foreach (Transaction transaction in transactions)
+            {
+                if (transaction.Contains(new Transaction(ItemList)))
+                {
+                    Transactions.Add(transaction);
+                }
+            }
+        }
+
+        public void AddTransactionsInTransactionDatabaseToList(TransactionDatabase transactionDatabase)
         {
             foreach (Transaction transaction in transactionDatabase.Transactions)
             {
                 if (transaction.Contains(new Transaction(ItemList)))
                 {
-                    TransactionIds.Add(transaction.Id);
+                    Transactions.Add(transaction);
                 }
             }
         }

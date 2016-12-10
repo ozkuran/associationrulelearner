@@ -38,6 +38,11 @@ namespace Common
         }
 
 
+        public Transaction(Item item) : this()
+        {
+            Items.Add(item);
+        }
+
         public List<Item> Items { get; set; }
         public double Support { get; set; }
         public int Id { get; set; }
