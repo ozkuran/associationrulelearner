@@ -209,6 +209,22 @@ namespace Common
             return outputString;
         }
 
+        public string ToCSV()
+        {
+            string outputString = "";
+            outputString += "Support,Item" +Environment.NewLine;
+            foreach (ItemsTransactionList itemsTransactionList in ItemsTransactionLists)
+            {
+                Transaction transaction = new Transaction();
+                foreach (Item item in itemsTransactionList.ItemList.Items)
+                {
+                    transaction.Items.Add(item);
+                }
+                outputString += $"{TransactionDatabase.GetSupportOfTransaction(transaction):0.00}," + transaction.ToString() +  Environment.NewLine;
+            }
+            return outputString;
+        }
+
         private static IEnumerable<IEnumerable<T>> GetCombinations<T>(IEnumerable<T> list, int length)
         {
             return length == 0 ? new[] { new T[0] } :

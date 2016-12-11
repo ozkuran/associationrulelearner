@@ -1,4 +1,6 @@
-﻿namespace GUI
+﻿using System;
+
+namespace GUI
 {
     partial class MainForm
     {
@@ -34,14 +36,21 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aprioriAlgorithmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eCLATAlgorithmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxAssociations = new System.Windows.Forms.TextBox();
             this.textBoxTransactions = new System.Windows.Forms.TextBox();
-            this.eCLATAlgorithmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.textBoxMinimumSupport = new System.Windows.Forms.TextBox();
+            this.labelMinimumSupport = new System.Windows.Forms.Label();
+            this.comboBoxTestDataSet = new System.Windows.Forms.ComboBox();
+            this.labelTestDataSet = new System.Windows.Forms.Label();
+            this.buttonExportToCsv = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -94,6 +103,13 @@
             this.aprioriAlgorithmToolStripMenuItem.Text = "Apriori Algorithm";
             this.aprioriAlgorithmToolStripMenuItem.Click += new System.EventHandler(this.aprioriAlgorithmToolStripMenuItem_Click);
             // 
+            // eCLATAlgorithmToolStripMenuItem
+            // 
+            this.eCLATAlgorithmToolStripMenuItem.Name = "eCLATAlgorithmToolStripMenuItem";
+            this.eCLATAlgorithmToolStripMenuItem.Size = new System.Drawing.Size(236, 30);
+            this.eCLATAlgorithmToolStripMenuItem.Text = "ECLAT Algorithm";
+            this.eCLATAlgorithmToolStripMenuItem.Click += new System.EventHandler(this.eCLATAlgorithmToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -113,6 +129,7 @@
             // 
             this.panel1.Controls.Add(this.textBoxAssociations);
             this.panel1.Controls.Add(this.textBoxTransactions);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 33);
             this.panel1.Name = "panel1";
@@ -122,27 +139,81 @@
             // textBoxAssociations
             // 
             this.textBoxAssociations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxAssociations.Location = new System.Drawing.Point(774, 0);
+            this.textBoxAssociations.Location = new System.Drawing.Point(774, 250);
             this.textBoxAssociations.Multiline = true;
             this.textBoxAssociations.Name = "textBoxAssociations";
-            this.textBoxAssociations.Size = new System.Drawing.Size(692, 982);
+            this.textBoxAssociations.Size = new System.Drawing.Size(692, 732);
             this.textBoxAssociations.TabIndex = 1;
             // 
             // textBoxTransactions
             // 
             this.textBoxTransactions.Dock = System.Windows.Forms.DockStyle.Left;
-            this.textBoxTransactions.Location = new System.Drawing.Point(0, 0);
+            this.textBoxTransactions.Location = new System.Drawing.Point(0, 250);
             this.textBoxTransactions.Multiline = true;
             this.textBoxTransactions.Name = "textBoxTransactions";
-            this.textBoxTransactions.Size = new System.Drawing.Size(774, 982);
+            this.textBoxTransactions.Size = new System.Drawing.Size(774, 732);
             this.textBoxTransactions.TabIndex = 0;
             // 
-            // eCLATAlgorithmToolStripMenuItem
+            // panel2
             // 
-            this.eCLATAlgorithmToolStripMenuItem.Name = "eCLATAlgorithmToolStripMenuItem";
-            this.eCLATAlgorithmToolStripMenuItem.Size = new System.Drawing.Size(236, 30);
-            this.eCLATAlgorithmToolStripMenuItem.Text = "ECLAT Algorithm";
-            this.eCLATAlgorithmToolStripMenuItem.Click += new System.EventHandler(this.eCLATAlgorithmToolStripMenuItem_Click);
+            this.panel2.Controls.Add(this.buttonExportToCsv);
+            this.panel2.Controls.Add(this.textBoxMinimumSupport);
+            this.panel2.Controls.Add(this.labelMinimumSupport);
+            this.panel2.Controls.Add(this.comboBoxTestDataSet);
+            this.panel2.Controls.Add(this.labelTestDataSet);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1466, 250);
+            this.panel2.TabIndex = 2;
+            // 
+            // textBoxMinimumSupport
+            // 
+            this.textBoxMinimumSupport.Location = new System.Drawing.Point(176, 68);
+            this.textBoxMinimumSupport.Name = "textBoxMinimumSupport";
+            this.textBoxMinimumSupport.Size = new System.Drawing.Size(187, 26);
+            this.textBoxMinimumSupport.TabIndex = 3;
+            this.textBoxMinimumSupport.Text = "0.1";
+            // 
+            // labelMinimumSupport
+            // 
+            this.labelMinimumSupport.AutoSize = true;
+            this.labelMinimumSupport.Location = new System.Drawing.Point(12, 71);
+            this.labelMinimumSupport.Name = "labelMinimumSupport";
+            this.labelMinimumSupport.Size = new System.Drawing.Size(133, 20);
+            this.labelMinimumSupport.TabIndex = 2;
+            this.labelMinimumSupport.Text = "Minimum Support";
+            // 
+            // comboBoxTestDataSet
+            // 
+            this.comboBoxTestDataSet.FormattingEnabled = true;
+            this.comboBoxTestDataSet.Items.AddRange(new object[] {
+            "sample.txt",
+            "groceries.csv"});
+            this.comboBoxTestDataSet.Location = new System.Drawing.Point(176, 20);
+            this.comboBoxTestDataSet.Name = "comboBoxTestDataSet";
+            this.comboBoxTestDataSet.Size = new System.Drawing.Size(187, 28);
+            this.comboBoxTestDataSet.TabIndex = 1;
+            this.comboBoxTestDataSet.Text = "groceries.csv";
+            // 
+            // labelTestDataSet
+            // 
+            this.labelTestDataSet.AutoSize = true;
+            this.labelTestDataSet.Location = new System.Drawing.Point(12, 23);
+            this.labelTestDataSet.Name = "labelTestDataSet";
+            this.labelTestDataSet.Size = new System.Drawing.Size(104, 20);
+            this.labelTestDataSet.TabIndex = 0;
+            this.labelTestDataSet.Text = "Test DataSet";
+            // 
+            // buttonExportToCsv
+            // 
+            this.buttonExportToCsv.Location = new System.Drawing.Point(16, 123);
+            this.buttonExportToCsv.Name = "buttonExportToCsv";
+            this.buttonExportToCsv.Size = new System.Drawing.Size(129, 48);
+            this.buttonExportToCsv.TabIndex = 4;
+            this.buttonExportToCsv.Text = "Export To CSV";
+            this.buttonExportToCsv.UseVisualStyleBackColor = true;
+            this.buttonExportToCsv.Click += new System.EventHandler(this.buttonExportToCsv_Click);
             // 
             // MainForm
             // 
@@ -158,6 +229,8 @@
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -177,6 +250,13 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eCLATAlgorithmToolStripMenuItem;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label labelTestDataSet;
+        private System.Windows.Forms.ComboBox comboBoxTestDataSet;
+        private System.Windows.Forms.Label labelMinimumSupport;
+        private System.Windows.Forms.TextBox textBoxMinimumSupport;
+        private String csvString;
+        private System.Windows.Forms.Button buttonExportToCsv;
     }
 }
 
