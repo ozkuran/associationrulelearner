@@ -52,6 +52,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="PerformanceTestAlgorithms.cs" />
     <Compile Include="UnitTestApriori.cs" />
     <Compile Include="UnitTestItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -37,17 +37,19 @@ namespace GUI
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aprioriAlgorithmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eCLATAlgorithmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.performanceTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxAssociations = new System.Windows.Forms.TextBox();
             this.textBoxTransactions = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonExportToCsv = new System.Windows.Forms.Button();
             this.textBoxMinimumSupport = new System.Windows.Forms.TextBox();
             this.labelMinimumSupport = new System.Windows.Forms.Label();
             this.comboBoxTestDataSet = new System.Windows.Forms.ComboBox();
             this.labelTestDataSet = new System.Windows.Forms.Label();
-            this.buttonExportToCsv = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -91,7 +93,9 @@ namespace GUI
             // 
             this.runToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.aprioriAlgorithmToolStripMenuItem,
-            this.eCLATAlgorithmToolStripMenuItem});
+            this.eCLATAlgorithmToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.performanceTestToolStripMenuItem});
             this.runToolStripMenuItem.Name = "runToolStripMenuItem";
             this.runToolStripMenuItem.Size = new System.Drawing.Size(98, 29);
             this.runToolStripMenuItem.Text = "Run Tests";
@@ -109,6 +113,18 @@ namespace GUI
             this.eCLATAlgorithmToolStripMenuItem.Size = new System.Drawing.Size(236, 30);
             this.eCLATAlgorithmToolStripMenuItem.Text = "ECLAT Algorithm";
             this.eCLATAlgorithmToolStripMenuItem.Click += new System.EventHandler(this.eCLATAlgorithmToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(233, 6);
+            // 
+            // performanceTestToolStripMenuItem
+            // 
+            this.performanceTestToolStripMenuItem.Name = "performanceTestToolStripMenuItem";
+            this.performanceTestToolStripMenuItem.Size = new System.Drawing.Size(236, 30);
+            this.performanceTestToolStripMenuItem.Text = "Performance Test";
+            this.performanceTestToolStripMenuItem.Click += new System.EventHandler(this.performanceTestToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -139,19 +155,19 @@ namespace GUI
             // textBoxAssociations
             // 
             this.textBoxAssociations.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxAssociations.Location = new System.Drawing.Point(774, 250);
+            this.textBoxAssociations.Location = new System.Drawing.Point(774, 249);
             this.textBoxAssociations.Multiline = true;
             this.textBoxAssociations.Name = "textBoxAssociations";
-            this.textBoxAssociations.Size = new System.Drawing.Size(692, 732);
+            this.textBoxAssociations.Size = new System.Drawing.Size(692, 733);
             this.textBoxAssociations.TabIndex = 1;
             // 
             // textBoxTransactions
             // 
             this.textBoxTransactions.Dock = System.Windows.Forms.DockStyle.Left;
-            this.textBoxTransactions.Location = new System.Drawing.Point(0, 250);
+            this.textBoxTransactions.Location = new System.Drawing.Point(0, 249);
             this.textBoxTransactions.Multiline = true;
             this.textBoxTransactions.Name = "textBoxTransactions";
-            this.textBoxTransactions.Size = new System.Drawing.Size(774, 732);
+            this.textBoxTransactions.Size = new System.Drawing.Size(774, 733);
             this.textBoxTransactions.TabIndex = 0;
             // 
             // panel2
@@ -164,8 +180,18 @@ namespace GUI
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1466, 250);
+            this.panel2.Size = new System.Drawing.Size(1466, 249);
             this.panel2.TabIndex = 2;
+            // 
+            // buttonExportToCsv
+            // 
+            this.buttonExportToCsv.Location = new System.Drawing.Point(16, 123);
+            this.buttonExportToCsv.Name = "buttonExportToCsv";
+            this.buttonExportToCsv.Size = new System.Drawing.Size(129, 48);
+            this.buttonExportToCsv.TabIndex = 4;
+            this.buttonExportToCsv.Text = "Export To CSV";
+            this.buttonExportToCsv.UseVisualStyleBackColor = true;
+            this.buttonExportToCsv.Click += new System.EventHandler(this.buttonExportToCsv_Click);
             // 
             // textBoxMinimumSupport
             // 
@@ -189,7 +215,9 @@ namespace GUI
             this.comboBoxTestDataSet.FormattingEnabled = true;
             this.comboBoxTestDataSet.Items.AddRange(new object[] {
             "sample.txt",
-            "groceries.csv"});
+            "small.txt",
+            "groceries.csv",
+            "retail.dat"});
             this.comboBoxTestDataSet.Location = new System.Drawing.Point(176, 20);
             this.comboBoxTestDataSet.Name = "comboBoxTestDataSet";
             this.comboBoxTestDataSet.Size = new System.Drawing.Size(187, 28);
@@ -204,16 +232,6 @@ namespace GUI
             this.labelTestDataSet.Size = new System.Drawing.Size(104, 20);
             this.labelTestDataSet.TabIndex = 0;
             this.labelTestDataSet.Text = "Test DataSet";
-            // 
-            // buttonExportToCsv
-            // 
-            this.buttonExportToCsv.Location = new System.Drawing.Point(16, 123);
-            this.buttonExportToCsv.Name = "buttonExportToCsv";
-            this.buttonExportToCsv.Size = new System.Drawing.Size(129, 48);
-            this.buttonExportToCsv.TabIndex = 4;
-            this.buttonExportToCsv.Text = "Export To CSV";
-            this.buttonExportToCsv.UseVisualStyleBackColor = true;
-            this.buttonExportToCsv.Click += new System.EventHandler(this.buttonExportToCsv_Click);
             // 
             // MainForm
             // 
@@ -257,6 +275,8 @@ namespace GUI
         private System.Windows.Forms.TextBox textBoxMinimumSupport;
         private String csvString;
         private System.Windows.Forms.Button buttonExportToCsv;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem performanceTestToolStripMenuItem;
     }
 }
 
