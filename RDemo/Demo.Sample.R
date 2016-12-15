@@ -2,23 +2,12 @@
 library(arules);
 
 ## Create transaction data set.
-data <- list(
-  c("a","b","c"),
-  c("a","b"),
-  c("a","b","d"),
-  c("b","e"),
-  c("b","c","e"),
-  c("a","d","e"),
-  c("a","c"),
-  c("a","b","d"),
-  c("c","e"),
-  c("a","b","d","e")
-)
+data <- read.csv("sample.txt")
 
 t <- as(data, "transactions")
 
 ## Mine itemsets with tidLists.
-f <- eclat(data, parameter = list(support = 0.5, tidLists = TRUE))
+f <- eclat(data, parameter = list(support = 0.05, tidLists = TRUE))
 
 ## Get dimensions of the tidLists.
 dim(tidLists(f))
