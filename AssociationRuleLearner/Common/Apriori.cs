@@ -43,6 +43,19 @@ namespace Common
             return outputString;
         }
 
+        public string ToCSV()
+        {
+            string outputString = "";
+            outputString += "Support,Item" + Environment.NewLine;
+            foreach (Transaction transaction in SupportedTransactionsList)
+            {
+                outputString += $"{TransactionDatabase.GetSupportOfTransaction(transaction):0.00}," + transaction.ToString() + Environment.NewLine;
+            }
+            return outputString;
+        }
+
+
+
         public int TransactionCountWithSupport()
         {
             return SupportedTransactionsList.Count;

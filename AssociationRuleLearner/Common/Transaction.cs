@@ -29,6 +29,20 @@ namespace Common
             Items.AddRange(itemList);
         }
 
+        public Transaction(ItemList itemList) : this()
+        {
+            foreach (Item item in itemList.Items)
+            {
+                Items.Add(item);
+            }
+        }
+
+
+        public Transaction(Item item) : this()
+        {
+            Items.Add(item);
+        }
+
         public List<Item> Items { get; set; }
         public double Support { get; set; }
         public int Id { get; set; }
