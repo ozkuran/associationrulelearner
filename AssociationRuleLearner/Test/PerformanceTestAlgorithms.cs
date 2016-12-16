@@ -16,7 +16,7 @@ namespace Test
             foreach (double support in supports)
             {
                 var start = DateTime.Now;
-                var transactions = new TransactionDatabase(@"simple.txt");
+                var transactions = new TransactionDatabase(@"small.txt");
                 var apriori = new Apriori(transactions, 0.2);
                 apriori.Run();
                 var end = DateTime.Now;
@@ -26,13 +26,13 @@ namespace Test
             foreach (double support in supports)
             {
                 var start = DateTime.Now;
-                var transactions = new TransactionDatabase(@"simple.txt");
+                var transactions = new TransactionDatabase(@"small.txt");
                 var eclat = new Eclat(transactions, 0.2);
                 eclat.Run();
                 var end = DateTime.Now;
                 var result = end - start;
                 stringResult += $"ECLAT Support:{support} Total Time (ms): {result.TotalMilliseconds}" + Environment.NewLine;
-                System.IO.File.WriteAllText(@"PerformanceResults.csv", stringResult);
+                System.IO.File.WriteAllText(@"PerformanceResultsAuto.csv", stringResult);
             }
         }
     }
