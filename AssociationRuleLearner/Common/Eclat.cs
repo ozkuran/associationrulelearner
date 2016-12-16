@@ -199,6 +199,10 @@ namespace Common
         public override string ToString()
         {
             string outputString = "";
+            outputString += "Total Transaction Count : " + TransactionDatabase.Transactions.Count + Environment.NewLine;
+            outputString += "Unique Item Count : " + TransactionDatabase.UniqueItems.Items.Count + Environment.NewLine;
+            outputString += "Supported Transaction Count : " + SupportedTransactionsList.Count + Environment.NewLine;
+            outputString += "---------------------------" + Environment.NewLine;
             foreach (ItemsTransactionList itemsTransactionList in ItemsTransactionLists)
             {
                 Transaction transaction = new Transaction();
@@ -206,7 +210,7 @@ namespace Common
                 {
                     transaction.Items.Add(item);
                 }
-                outputString += transaction.ToString() + $" Support : {TransactionDatabase.GetSupportOfTransaction(transaction):0.00} " + Environment.NewLine;
+                outputString += $" Support : {TransactionDatabase.GetSupportOfTransaction(transaction):0.00} " + "Transaction : " + transaction.ToString() + Environment.NewLine;
             }
             return outputString;
         }

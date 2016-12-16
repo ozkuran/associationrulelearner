@@ -24,13 +24,9 @@ namespace GUI
 
         private void aprioriAlgorithmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //var transactions = new TransactionDatabase(@"sample.txt");
-            //var transactions = new TransactionDatabase(@"groceries.csv");
             var transactions = new TransactionDatabase(comboBoxTestDataSet.Text);
-            //var apriori = new Apriori(transactions,0.02);
             var apriori = new Apriori(transactions, double.Parse(textBoxMinimumSupport.Text));
             apriori.Run();
-            //textBoxTransactions.Text = transactions.ToString();
             textBoxOutput.Text = apriori.ToString();
             csvString = apriori.ToCSV();
         }
@@ -43,13 +39,9 @@ namespace GUI
 
         private void eCLATAlgorithmToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //var transactions = new TransactionDatabase(@"sample.txt");
-            //var transactions = new TransactionDatabase(@"groceries.csv");
             var transactions = new TransactionDatabase(comboBoxTestDataSet.Text);
-            //var eclat = new Eclat(transactions, 0.02);
             var eclat = new Eclat(transactions, double.Parse(textBoxMinimumSupport.Text));
             eclat.Run();
-            //textBoxTransactions.Text = transactions.ToString();
             textBoxOutput.Text = eclat.ToString();
             csvString = eclat.ToCSV();
         }

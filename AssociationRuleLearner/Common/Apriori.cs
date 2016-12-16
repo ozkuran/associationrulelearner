@@ -36,9 +36,13 @@ namespace Common
         public override string ToString()
         {
             string outputString = "";
+            outputString += "Total Transaction Count : " + TransactionDatabase.Transactions.Count + Environment.NewLine;
+            outputString += "Unique Item Count : " + TransactionDatabase.UniqueItems.Items.Count + Environment.NewLine;
+            outputString += "Supported Transaction Count : " + SupportedTransactionsList.Count + Environment.NewLine;
+            outputString += "---------------------------" + Environment.NewLine;
             foreach (Transaction transaction in SupportedTransactionsList)
             {
-                outputString += transaction.ToString() + $" Support : {transaction.Support:0.00} " + Environment.NewLine;
+                outputString += $" Support : {transaction.Support:0.00} " + "Transaction : " + transaction.ToString() + Environment.NewLine;
             }
             return outputString;
         }
