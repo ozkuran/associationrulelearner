@@ -30,8 +30,8 @@ namespace GUI
             //var apriori = new Apriori(transactions,0.02);
             var apriori = new Apriori(transactions, double.Parse(textBoxMinimumSupport.Text));
             apriori.Run();
-            textBoxTransactions.Text = transactions.ToString();
-            textBoxAssociations.Text = apriori.ToString();
+            //textBoxTransactions.Text = transactions.ToString();
+            textBoxOutput.Text = apriori.ToString();
             csvString = apriori.ToCSV();
         }
 
@@ -49,8 +49,8 @@ namespace GUI
             //var eclat = new Eclat(transactions, 0.02);
             var eclat = new Eclat(transactions, double.Parse(textBoxMinimumSupport.Text));
             eclat.Run();
-            textBoxTransactions.Text = transactions.ToString();
-            textBoxAssociations.Text = eclat.ToString();
+            //textBoxTransactions.Text = transactions.ToString();
+            textBoxOutput.Text = eclat.ToString();
             csvString = eclat.ToCSV();
         }
 
@@ -92,6 +92,11 @@ namespace GUI
                 stringResult += $"ECLAT Support:{support} Total Time (ms): {result.TotalMilliseconds} Memory Usage (bytes): {resultMem}" + Environment.NewLine;
                 System.IO.File.WriteAllText(@"PerformanceResults.txt", stringResult);
             }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
