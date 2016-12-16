@@ -98,5 +98,11 @@ namespace GUI
         {
             Application.Exit();
         }
+
+        private void textBoxCommandTerminal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+                textBoxOutput.AppendText("Enter has been pressed" + Environment.NewLine);
+        }
     }
 }

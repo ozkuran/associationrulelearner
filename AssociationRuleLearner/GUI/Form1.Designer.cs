@@ -34,6 +34,8 @@ namespace GUI
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.runToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aprioriAlgorithmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eCLATAlgorithmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,13 +46,12 @@ namespace GUI
             this.panel1 = new System.Windows.Forms.Panel();
             this.textBoxOutput = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.textBoxCommandTerminal = new System.Windows.Forms.TextBox();
             this.buttonExportToCsv = new System.Windows.Forms.Button();
             this.textBoxMinimumSupport = new System.Windows.Forms.TextBox();
             this.labelMinimumSupport = new System.Windows.Forms.Label();
             this.comboBoxTestDataSet = new System.Windows.Forms.ComboBox();
             this.labelTestDataSet = new System.Windows.Forms.Label();
-            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -85,15 +86,27 @@ namespace GUI
             // 
             this.newToolStripMenuItem.Enabled = false;
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.newToolStripMenuItem.Text = "New";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Enabled = false;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(100, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // runToolStripMenuItem
             // 
@@ -153,7 +166,7 @@ namespace GUI
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(977, 636);
             this.panel1.TabIndex = 1;
@@ -161,15 +174,16 @@ namespace GUI
             // textBoxOutput
             // 
             this.textBoxOutput.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxOutput.Location = new System.Drawing.Point(0, 162);
-            this.textBoxOutput.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxOutput.Location = new System.Drawing.Point(0, 165);
+            this.textBoxOutput.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxOutput.Multiline = true;
             this.textBoxOutput.Name = "textBoxOutput";
-            this.textBoxOutput.Size = new System.Drawing.Size(977, 474);
+            this.textBoxOutput.Size = new System.Drawing.Size(977, 471);
             this.textBoxOutput.TabIndex = 1;
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.textBoxCommandTerminal);
             this.panel2.Controls.Add(this.buttonExportToCsv);
             this.panel2.Controls.Add(this.textBoxMinimumSupport);
             this.panel2.Controls.Add(this.labelMinimumSupport);
@@ -177,15 +191,23 @@ namespace GUI
             this.panel2.Controls.Add(this.labelTestDataSet);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(977, 162);
+            this.panel2.Size = new System.Drawing.Size(977, 165);
             this.panel2.TabIndex = 2;
+            // 
+            // textBoxCommandTerminal
+            // 
+            this.textBoxCommandTerminal.Location = new System.Drawing.Point(11, 137);
+            this.textBoxCommandTerminal.Name = "textBoxCommandTerminal";
+            this.textBoxCommandTerminal.Size = new System.Drawing.Size(232, 20);
+            this.textBoxCommandTerminal.TabIndex = 5;
+            this.textBoxCommandTerminal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCommandTerminal_KeyPress);
             // 
             // buttonExportToCsv
             // 
             this.buttonExportToCsv.Location = new System.Drawing.Point(11, 80);
-            this.buttonExportToCsv.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonExportToCsv.Margin = new System.Windows.Forms.Padding(2);
             this.buttonExportToCsv.Name = "buttonExportToCsv";
             this.buttonExportToCsv.Size = new System.Drawing.Size(86, 31);
             this.buttonExportToCsv.TabIndex = 4;
@@ -196,7 +218,7 @@ namespace GUI
             // textBoxMinimumSupport
             // 
             this.textBoxMinimumSupport.Location = new System.Drawing.Point(117, 44);
-            this.textBoxMinimumSupport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxMinimumSupport.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxMinimumSupport.Name = "textBoxMinimumSupport";
             this.textBoxMinimumSupport.Size = new System.Drawing.Size(126, 20);
             this.textBoxMinimumSupport.TabIndex = 3;
@@ -221,7 +243,7 @@ namespace GUI
             "groceries.csv",
             "retail.dat"});
             this.comboBoxTestDataSet.Location = new System.Drawing.Point(117, 13);
-            this.comboBoxTestDataSet.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxTestDataSet.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxTestDataSet.Name = "comboBoxTestDataSet";
             this.comboBoxTestDataSet.Size = new System.Drawing.Size(126, 21);
             this.comboBoxTestDataSet.TabIndex = 1;
@@ -237,18 +259,6 @@ namespace GUI
             this.labelTestDataSet.TabIndex = 0;
             this.labelTestDataSet.Text = "Test DataSet";
             // 
-            // toolStripMenuItem2
-            // 
-            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
-            this.toolStripMenuItem2.Size = new System.Drawing.Size(149, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,7 +267,7 @@ namespace GUI
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainForm";
             this.Text = "Association Rule Learner";
             this.menuStrip1.ResumeLayout(false);
@@ -295,6 +305,7 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem performanceTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.TextBox textBoxCommandTerminal;
     }
 }
 
