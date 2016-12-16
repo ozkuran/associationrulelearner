@@ -16,7 +16,7 @@ namespace Test
             foreach (double support in supports)
             {
                 var start = DateTime.Now;
-                var transactions = new TransactionDatabase(@"groceries.csv");
+                var transactions = new TransactionDatabase(@"simple.txt");
                 var apriori = new Apriori(transactions, 0.2);
                 apriori.Run();
                 var end = DateTime.Now;
@@ -26,7 +26,7 @@ namespace Test
             foreach (double support in supports)
             {
                 var start = DateTime.Now;
-                var transactions = new TransactionDatabase(@"groceries.csv");
+                var transactions = new TransactionDatabase(@"simple.txt");
                 var eclat = new Eclat(transactions, 0.2);
                 eclat.Run();
                 var end = DateTime.Now;

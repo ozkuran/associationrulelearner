@@ -66,5 +66,37 @@ namespace Test
             Assert.AreEqual("A", item.ToString(), "Item.ToString() did not work correct!");
         }
 
+
+        [TestMethod]
+        public void Did_Item_NotEqual_Operator_Works_Correct()
+        {
+            var itemA = new Item("A");
+            var itemB = new Item("B");
+
+            // Assert
+            Assert.IsTrue((itemA != itemB), "Item_NotEqual_Operator did not work correct!");
+        }
+
+        [TestMethod]
+        public void Did_Item_Equals_Operator_Works_Correct()
+        {
+            var itemA = new Item("A");
+            var itemB = new Item("B");
+
+            // Assert
+            Assert.IsFalse(itemA.Equals(itemB), "Item_Equals_Operator did not work correct!");
+        }
+
+        [TestMethod]
+        public void Did_Item_CompareTo_Operator_Works_Correct()
+        {
+            var itemA = new Item("A");
+            var itemB = new Item("A");
+            var itemC = new Item("C");
+
+            // Assert
+            Assert.AreEqual(0,itemA.CompareTo(itemB), "Item_CompareTo_Operator did not work correct!");
+            Assert.AreNotEqual(0, itemA.CompareTo(itemC), "Item_CompareTo_Operator did not work correct!");
+        }
     }
 }

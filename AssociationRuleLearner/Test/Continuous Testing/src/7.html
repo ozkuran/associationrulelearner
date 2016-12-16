@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\GitHub\associationrulelearner\AssociationRuleLearner\Test\UnitTestTransactionDatabase.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.ComponentModel.Design;
+using Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Test
+{
+    [TestClass]
+    public class UnitTestTransactionDatabase
+    {
+        [TestMethod]
+        public void Did_TransactionDatabase_Created_with_Default_Constructor()
+        {
+            var transactions = new TransactionDatabase();
+
+            Assert.IsNotNull(transactions,&quot;transactions != null&quot;);
+        }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_TransactionList_Created_with_Default_Constructor()
+        {
+            var transactions = new TransactionDatabase();
+
+            Assert.IsNotNull(transactions.Transactions, &quot;transactions.Transactions != null&quot;);
+        }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_Loaded_From_Comma_Seperated_File()
+        {
+            var transactions = new TransactionDatabase(@&quot;sample.txt&quot;);
+
+            Assert.IsNotNull(transactions.Transactions, &quot;transactions.Transactions != null&quot;);
+
+        }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_GetMaxTransactionLength_Returns_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,D&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,D,A&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C&quot;));
+
+            Assert.AreEqual(5,transactions.GetMaxTransactionLength(), &quot;GetMaxTransactionLength is not equals to 5&quot;);
+        }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_Support_Returns_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,D&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,D,A&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C&quot;));
+            var support = transactions.GetSupportOfTransaction(new Transaction(&quot;A,B,C&quot;));
+            Assert.AreEqual(0.75, support, &quot;GetSupportOfTransaction is not equals to 0.75&quot;);
+        }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_Confidence_Returns_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,D&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,A&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C&quot;));
+            var support = transactions.GetConfidenceOfTransactions(new Transaction(&quot;A,B&quot;), new Transaction(&quot;D&quot;));
+            Assert.AreEqual(0.25, support, &quot;GetSupportOfTransaction is not equals to 0.25&quot;);
+
+            support = transactions.GetConfidenceOfTransactions(new Transaction(&quot;A,B&quot;), new Transaction(&quot;A,B&quot;));
+            Assert.AreEqual(1, support, &quot;GetSupportOfTransaction is not equals to 1&quot;);
+
+        }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_Lift_Returns_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,D&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,A&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C&quot;));
+            var lift = transactions.GetLiftOfTransactions(new Transaction(&quot;A,B&quot;), new Transaction(&quot;D&quot;));
+            Assert.AreEqual(1, lift, &quot;GetLiftOfTransaction is not equals to 0.25&quot;);
+
+            lift = transactions.GetLiftOfTransactions(new Transaction(&quot;A,B&quot;), new Transaction(&quot;A,B&quot;));
+            Assert.AreEqual(1, lift, &quot;GetLiftOfTransaction is not equals to 1&quot;);
+        }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_Conviction_Returns_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,D&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,A&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C&quot;));
+            var conviction = transactions.GetConvictionOfTransactions(new Transaction(&quot;A,B&quot;), new Transaction(&quot;D&quot;));
+            Assert.AreEqual(1, conviction, &quot;GetConvictionOfTransactions is not equals to 1&quot;);
+
+            conviction = transactions.GetConvictionOfTransactions(new Transaction(&quot;A,B&quot;), new Transaction(&quot;A,B&quot;));
+            Assert.AreEqual(double.NaN, conviction, &quot;GetConvictionOfTransactions is not equals to NaN&quot;);
+        }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_CreateUniqueItemList_Populates_Correct()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,D&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C,A&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B&quot;));
+            transactions.AddTransaction(new Transaction(&quot;A,B,C&quot;));
+            transactions.CreateUniqueItemsList();
+            Assert.AreEqual(4, transactions.UniqueItems.Items.Count, &quot;UniqueItemsList populates incorrectly&quot;);
+        }
+
+        [TestMethod]
+        public void Did_TransactionDatabase_CreateRandomTransactionDatabase_Populates_Correct_Amount_of_Element()
+        {
+            var transactions = new TransactionDatabase();
+            transactions.CreateRandomTransactionDatabase(10);
+            Assert.AreEqual(10, transactions.Transactions.Count, &quot;CreateRandomTransactionDatabase populates incorrect amount of Transactions&quot;);
+        }
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[13,9,13,10,1],[14,13,14,58,1],[16,13,16,67,1],[17,9,17,10,1],[21,9,21,10,1],[22,13,22,58,1],[24,13,24,94,1],[25,9,25,10,1],[29,9,29,10,1],[30,13,30,71,1],[32,13,32,94,1],[34,9,34,10,1],[38,9,38,10,1],[39,13,39,58,1],[40,13,40,69,1],[41,13,41,71,1],[42,13,42,65,1],[43,13,43,67,1],[45,13,45,117,1],[46,9,46,10,1],[50,9,50,10,1],[51,13,51,58,1],[52,13,52,69,1],[53,13,53,71,1],[54,13,54,65,1],[55,13,55,67,1],[56,13,56,90,1],[57,13,57,93,1],[58,9,58,10,1],[62,9,62,10,1],[63,13,63,58,1],[64,13,64,69,1],[65,13,65,69,1],[66,13,66,65,1],[67,13,67,67,1],[68,13,68,114,1],[69,13,69,93,1],[71,13,71,112,1],[72,13,72,87,1],[74,9,74,10,1],[78,9,78,10,1],[79,13,79,58,1],[80,13,80,69,1],[81,13,81,69,1],[82,13,82,65,1],[83,13,83,67,1],[84,13,84,105,1],[85,13,85,84,1],[87,13,87,103,1],[88,13,88,81,1],[89,9,89,10,1],[93,9,93,10,1],[94,13,94,58,1],[95,13,95,69,1],[96,13,96,69,1],[97,13,97,65,1],[98,13,98,67,1],[99,13,99,117,1],[100,13,100,94,1],[102,13,102,115,1],[103,13,103,105,1],[104,9,104,10,1],[108,9,108,10,1],[109,13,109,58,1],[110,13,110,69,1],[111,13,111,69,1],[112,13,112,65,1],[113,13,113,67,1],[114,13,114,50,1],[115,13,115,111,1],[116,9,116,10,1],[120,9,120,10,1],[121,13,121,58,1],[122,13,122,62,1],[123,13,123,144,1],[124,9,124,10,1]]);
+    </script>
+  </body>
+</html>

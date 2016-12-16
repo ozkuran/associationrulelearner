@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Test.UnitTestApriori">
+    <Position X="0.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAEABAAAAAAAAAAA=</HashCode>
+      <FileName>UnitTestApriori.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test.UnitTestEclat">
+    <Position X="0.5" Y="2" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitTestEclat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test.UnitTestItem">
+    <Position X="0.5" Y="3.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAQAAAAAAQABAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>UnitTestItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test.UnitTestItemList">
+    <Position X="4" Y="0.5" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAaAEAAAAAAAAAAABAAAAAAAAAAEAAAAAAQAAAE=</HashCode>
+      <FileName>UnitTestItemList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test.UnitTestRule">
+    <Position X="11" Y="0.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAgAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UnitTestRule.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test.UnitTestTransaction">
+    <Position X="11" Y="2" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AQAAAACAAAAAAAAAAAAAAAAAAAQAAAAAACAAAEQAAAA=</HashCode>
+      <FileName>UnitTestTransaction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Test.UnitTestTransactionDatabase">
+    <Position X="4" Y="3.75" Width="6.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIgAAAAAAgAAAAhAAAAAAAAABAgBACAAAAEAAA=</HashCode>
+      <FileName>UnitTestTransactionDatabase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

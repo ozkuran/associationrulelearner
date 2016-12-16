@@ -33,16 +33,16 @@ namespace Common
         public bool CalculateConfidence { get; set; }
         public bool CalculateLift { get; set; }
         public bool CalculateConviction { get; set; }
-        public List<Transaction> SupportedTransactionsList { get; set; }
-        public List<Transaction> UnSupportedTransactionsList { get; set; }
+        public HashSet<Transaction> SupportedTransactionsList { get; set; }
+        public HashSet<Transaction> UnSupportedTransactionsList { get; set; }
 
         public List<ItemsTransactionList> ItemsTransactionLists { get; set; }
 
         public void Run()
         {
             TransactionDatabase.CreateUniqueItemsList();
-            SupportedTransactionsList = new List<Transaction>();
-            UnSupportedTransactionsList = new List<Transaction>();
+            SupportedTransactionsList = new HashSet<Transaction>();
+            UnSupportedTransactionsList = new HashSet<Transaction>();
             List<ItemsTransactionList> uniqueItemsTransactionLists = new List<ItemsTransactionList>();
             List<ItemsTransactionList> tempUniqueItemsTransactionLists = new List<ItemsTransactionList>();
             foreach (Item uniqueItem in TransactionDatabase.UniqueItems.Items)
@@ -55,6 +55,7 @@ namespace Common
                 {
                     ItemsTransactionLists.Add(itemsTransactionList);
                     uniqueItemsTransactionLists.Add(itemsTransactionList);
+                    SupportedTransactionsList.Add(new Transaction(uniqueItem));
                 }
             }
 
@@ -102,6 +103,7 @@ namespace Common
                 foreach (ItemsTransactionList tmpItemsTransactionList in candidateTransactions)
                 {
                     ItemsTransactionLists.Add(tmpItemsTransactionList);
+                    SupportedTransactionsList.Add(new Transaction(tmpItemsTransactionList.ItemList));
                 }
                 maxItemCount++;
             }
@@ -230,6 +232,16 @@ namespace Common
             return length == 0 ? new[] { new T[0] } :
               list.SelectMany((e, i) =>
                 GetCombinations(list.Skip(i + 1), length - 1).Select(c => (new[] { e }).Concat(c)));
+        }
+
+        public bool IsTransactionSupported(Transaction transaction)
+        {
+            return SupportedTransactionsList.Any(transaction1 => transaction == transaction1);
+        }
+
+        public int TransactionCountWithSupport()
+        {
+            return SupportedTransactionsList.Count;
         }
 
     }

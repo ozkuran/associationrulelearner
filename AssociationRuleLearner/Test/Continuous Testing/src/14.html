@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\GitHub\associationrulelearner\AssociationRuleLearner\Common\TransactionDatabase.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Common
+{
+    public class TransactionDatabase
+    {
+        public TransactionDatabase()
+        {
+            Transactions = new List&lt;Transaction&gt;();
+            UniqueItems = new ItemList();
+        }
+
+        public TransactionDatabase(string fileName) : this()
+        {
+            LoadTransactionsFromCommaSeperatedFile(fileName);
+        }
+
+        public List&lt;Transaction&gt; Transactions { get; set; }
+        public ItemList UniqueItems { get; set; }
+
+        public override string ToString()
+        {
+            string outputString = &quot;&quot;;
+            foreach (Transaction transaction in Transactions)
+            {
+                outputString += transaction.ToString() + Environment.NewLine;
+            }
+            return outputString;
+        }
+
+        public void AddTransaction(Transaction transaction)
+        {
+            Transactions.Add(transaction);
+        }
+
+        public void LoadTransactionsFromCommaSeperatedFile(string fileName)
+        {
+            var lines = File.ReadLines(fileName);
+            foreach (var line in lines)
+            {
+                var transaction = new Transaction(line);
+                transaction.Id = Transactions.Count;
+                AddTransaction(transaction);
+            }
+        }
+
+        public int GetMaxTransactionLength()
+        {
+            return Transactions.Select(transaction =&gt; transaction.Items.Count).Concat(new[] {0}).Max();
+        }
+
+        public double GetSupportOfTransaction(Transaction transaction)
+        {
+            int containedTransaction = 0;
+            foreach (Transaction transaction1 in Transactions)
+            {
+                if (transaction1.Contains(transaction))
+                {
+                    containedTransaction++;
+                }
+            }
+            var support = (double)(containedTransaction)/(double)(Transactions.Count);
+            return support;
+        }
+
+        public double GetConfidenceOfTransactions(Transaction transaction1, Transaction transaction2)
+        {
+            var support = GetSupportOfTransaction(transaction1 + transaction2) / (GetSupportOfTransaction(transaction1));
+            return support;
+        }
+
+        public double GetLiftOfTransactions(Transaction transaction1, Transaction transaction2)
+        {
+            var support = GetSupportOfTransaction(transaction1 + transaction2) / (GetSupportOfTransaction(transaction1) * GetSupportOfTransaction(transaction2));
+            return support;
+        }
+
+        public double GetConvictionOfTransactions(Transaction transaction1, Transaction transaction2)
+        {
+            var support = (1 - GetSupportOfTransaction(transaction2)) / (1 - GetConfidenceOfTransactions(transaction1, transaction2));
+            return support;
+        }
+
+        public void CreateUniqueItemsList()
+        {
+            foreach (Transaction transaction in Transactions)
+            {
+                UniqueItems.AddItemsOfTransaction(transaction);
+            }
+        }
+
+        public void CreateRandomTransactionDatabase(int databaseSize)
+        {
+            for (var i = 0; i &lt; databaseSize; i++)
+            {
+                Transactions.Add(GenerateRandomTransaction()); 
+            }
+        }
+
+        protected virtual Transaction GenerateRandomTransaction()
+        {
+            var rnd = new Random();
+            int itemCount = rnd.Next(9);
+            string items = &quot;&quot;;
+            for (int i = 0; i &lt; itemCount; i++)
+            {
+                items += GetRandomCharacter(&quot;QWERTYUIOPASDFGHJKLZXCVBNM&quot;);
+            }
+            return new Transaction(string.Join(items, &quot;,&quot;));
+        }
+
+        private static char GetRandomCharacter(string text)
+        {
+            var rnd = new Random();
+            var index = rnd.Next(text.Length);
+            return text[index];
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[28,9,28,10,0],[29,13,29,38,0],[30,13,30,20,0],[30,49,30,61,0],[30,22,30,45,0],[31,13,31,14,0],[32,17,32,78,0],[33,13,33,14,0],[30,46,30,48,0],[34,13,34,33,0],[35,9,35,10,0],[13,9,13,37,1],[14,9,14,10,1],[15,13,15,52,1],[16,13,16,42,1],[17,9,17,10,1],[19,55,19,61,1],[20,9,20,10,1],[21,13,21,62,1],[22,9,22,10,1],[24,49,24,53,1],[24,54,24,58,1],[25,39,25,43,1],[25,44,25,48,1],[38,9,38,10,1],[39,13,39,43,1],[40,9,40,10,1],[43,9,43,10,1],[44,13,44,50,1],[45,13,45,20,1],[45,34,45,39,1],[45,22,45,30,1],[46,13,46,14,1],[47,17,47,57,1],[48,17,48,53,1],[49,17,49,45,1],[50,13,50,14,1],[45,31,45,33,1],[51,9,51,10,1],[54,9,54,10,1],[55,13,55,55,1],[55,78,55,104,1],[56,9,56,10,1],[59,9,59,10,1],[60,13,60,42,1],[61,13,61,20,1],[61,50,61,62,1],[61,22,61,46,1],[62,13,62,14,1],[63,17,63,56,1],[64,17,64,18,1],[65,21,65,44,1],[66,17,66,18,1],[67,13,67,14,1],[61,47,61,49,1],[68,13,68,87,1],[69,13,69,28,1],[70,9,70,10,1],[73,9,73,10,1],[74,13,74,122,1],[75,13,75,28,1],[76,9,76,10,1],[79,9,79,10,1],[80,13,80,162,1],[81,13,81,28,1],[82,9,82,10,1],[85,9,85,10,1],[86,13,86,135,1],[87,13,87,28,1],[88,9,88,10,1],[91,9,91,10,1],[92,13,92,20,1],[92,49,92,61,1],[92,22,92,45,1],[93,13,93,14,1],[94,17,94,64,1],[95,13,95,14,1],[92,46,92,48,1],[96,9,96,10,1],[99,9,99,10,1],[100,18,100,27,1],[101,13,101,14,1],[102,17,102,63,1],[103,13,103,14,1],[100,47,100,50,1],[100,29,100,45,1],[104,9,104,10,1],[107,9,107,10,1],[108,13,108,36,1],[109,13,109,41,1],[110,13,110,31,1],[111,18,111,27,1],[112,13,112,14,1],[113,17,113,75,1],[114,13,114,14,1],[111,44,111,47,1],[111,29,111,42,1],[115,13,115,61,1],[116,9,116,10,1],[119,9,119,10,1],[120,13,120,36,1],[121,13,121,47,1],[122,13,122,32,1],[123,9,123,10,1],[55,55,55,78,1]]);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\GitHub\associationrulelearner\AssociationRuleLearner\Test\UnitTestItemList.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Text;
+using System.Collections.Generic;
+using Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Test
+{
+    /// &lt;summary&gt;
+    /// Summary description for UnitTestItemList
+    /// &lt;/summary&gt;
+    [TestClass]
+    public class UnitTestItemList
+    {
+        public UnitTestItemList()
+        {
+            //
+            // TODO: Add constructor logic here
+            //
+        }
+
+        private TestContext testContextInstance;
+
+        /// &lt;summary&gt;
+        ///Gets or sets the test context which provides
+        ///information about and functionality for the current test run.
+        ///&lt;/summary&gt;
+        public TestContext TestContext
+        {
+            get
+            {
+                return testContextInstance;
+            }
+            set
+            {
+                testContextInstance = value;
+            }
+        }
+
+        #region Additional test attributes
+        //
+        // You can use the following additional attributes as you write your tests:
+        //
+        // Use ClassInitialize to run code before running the first test in the class
+        // [ClassInitialize()]
+        // public static void MyClassInitialize(TestContext testContext) { }
+        //
+        // Use ClassCleanup to run code after all tests in a class have run
+        // [ClassCleanup()]
+        // public static void MyClassCleanup() { }
+        //
+        // Use TestInitialize to run code before running each test 
+        // [TestInitialize()]
+        // public void MyTestInitialize() { }
+        //
+        // Use TestCleanup to run code after each test has run
+        // [TestCleanup()]
+        // public void MyTestCleanup() { }
+        //
+        #endregion
+
+        [TestMethod]
+        public void Did_ItemList_Created_With_Default_Constructor()
+        {
+            ItemList itemList = new ItemList();
+
+            Assert.IsNotNull(itemList);
+        }
+
+        [TestMethod]
+        public void Did_ItemListItems_Created_With_Default_Constructor()
+        {
+            ItemList itemList = new ItemList();
+
+            Assert.IsNotNull(itemList.Items);
+        }
+
+        [TestMethod]
+        public void Did_ItemListItems_Added_Correctly_With_AddItemsOfTransaction()
+        {
+            var itemList = new ItemList();
+            var transaction = new Transaction();
+            transaction.Items.Add(new Item(&quot;A&quot;));
+            transaction.Items.Add(new Item(&quot;B&quot;));
+            transaction.Items.Add(new Item(&quot;C&quot;));
+            transaction.Items.Add(new Item(&quot;D&quot;));
+            transaction.Items.Add(new Item(&quot;E&quot;));
+            itemList.AddItemsOfTransaction(transaction);
+
+            Assert.IsTrue(itemList.IsItemPresent(new Item(&quot;A&quot;))&amp;&amp; itemList.IsItemPresent(new Item(&quot;B&quot;)) &amp;&amp; itemList.IsItemPresent(new Item(&quot;C&quot;)) &amp;&amp; itemList.IsItemPresent(new Item(&quot;D&quot;)) &amp;&amp; itemList.IsItemPresent(new Item(&quot;E&quot;)), &quot;All added items are found in the list&quot;);
+        }
+
+
+        [TestMethod]
+        public void Did_ItemListItems_IsItemPresent_True()
+        {
+            var itemList = new ItemList();
+            itemList.Items.Add(new Item(&quot;A&quot;));
+            itemList.Items.Add(new Item(&quot;B&quot;));
+
+            Assert.IsTrue(itemList.IsItemPresent(new Item(&quot;A&quot;)), &quot;Present item detected as non-present&quot;);
+        }
+
+        [TestMethod]
+        public void Did_ItemListItems_IsItemPresent_False()
+        {
+            var itemList = new ItemList();
+            itemList.Items.Add(new Item(&quot;A&quot;));
+            itemList.Items.Add(new Item(&quot;B&quot;));
+
+            Assert.IsFalse(itemList.IsItemPresent(new Item(&quot;C&quot;)),&quot;Non-present item detected as present&quot;);
+        }
+
+        [TestMethod]
+        public void Did_ItemListItems_Added_Correctly_With_AddItemsOfTransaction_Did_Only_Unique_Items_Added_To_ItemList()
+        {
+            var itemList = new ItemList();
+            var transaction = new Transaction();
+            transaction.Items.Add(new Item(&quot;A&quot;));
+            transaction.Items.Add(new Item(&quot;B&quot;));
+            transaction.Items.Add(new Item(&quot;C&quot;));
+            transaction.Items.Add(new Item(&quot;D&quot;));
+            transaction.Items.Add(new Item(&quot;E&quot;));
+            transaction.Items.Add(new Item(&quot;E&quot;));
+            itemList.AddItemsOfTransaction(transaction);
+
+            Assert.AreEqual(itemList.Items.Count, 5, &quot;Amount of Transaction Items Added Correctly&quot;);
+        }
+
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[31,13,31,14,0],[32,17,32,44,0],[33,13,33,14,0],[15,9,15,34,1],[16,9,16,10,1],[20,9,20,10,1],[35,13,35,14,1],[36,17,36,45,1],[37,13,37,14,1],[64,9,64,10,1],[65,13,65,48,1],[67,13,67,40,1],[68,9,68,10,1],[72,9,72,10,1],[73,13,73,48,1],[75,13,75,46,1],[76,9,76,10,1],[80,9,80,10,1],[81,13,81,43,1],[82,13,82,49,1],[83,13,83,50,1],[84,13,84,50,1],[85,13,85,50,1],[86,13,86,50,1],[87,13,87,50,1],[88,13,88,57,1],[90,13,90,270,1],[91,9,91,10,1],[96,9,96,10,1],[97,13,97,43,1],[98,13,98,47,1],[99,13,99,47,1],[101,13,101,106,1],[102,9,102,10,1],[106,9,106,10,1],[107,13,107,43,1],[108,13,108,47,1],[109,13,109,47,1],[111,13,111,106,1],[112,9,112,10,1],[116,9,116,10,1],[117,13,117,43,1],[118,13,118,49,1],[119,13,119,50,1],[120,13,120,50,1],[121,13,121,50,1],[122,13,122,50,1],[123,13,123,50,1],[124,13,124,50,1],[125,13,125,57,1],[127,13,127,101,1],[128,9,128,10,1]]);
+    </script>
+  </body>
+</html>

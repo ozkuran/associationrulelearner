@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\GitHub\associationrulelearner\AssociationRuleLearner\Common\Rule.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security;
+using System.Security.Policy;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Common
+{
+    public class Rule
+    {
+        public Rule()
+        {
+            
+        }
+
+        public Rule(List&lt;Item&gt; items, double support, double confidence)
+        {
+            Items = items;
+            Support = support;
+            Confidence = confidence;
+        }
+
+        public List&lt;Item&gt; Items { get; set; }
+        public double Support { get; set; }
+        public double Confidence { get; set; }
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[25,35,25,39,0],[26,33,26,37,0],[27,36,27,40,0],[13,9,13,22,1],[14,9,14,10,1],[16,9,16,10,1],[18,9,18,73,1],[19,9,19,10,1],[20,13,20,27,1],[21,13,21,31,1],[22,13,22,37,1],[23,9,23,10,1],[25,40,25,44,1],[26,38,26,42,1],[27,41,27,45,1]]);
+    </script>
+  </body>
+</html>

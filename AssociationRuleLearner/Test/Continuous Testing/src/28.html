@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\GitHub\associationrulelearner\AssociationRuleLearner\Common\ItemTransactions.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Common
+{
+    public class ItemTransactions
+    {
+        public ItemTransactions()
+        {
+            Item = new Item();
+            TransactionList = new HashSet&lt;Transaction&gt;();
+        }
+
+        public ItemTransactions(Item item)
+        {
+            Item = item;
+            TransactionList = new HashSet&lt;Transaction&gt;();
+        }
+
+        public void GetTransactionsFromDatabase(TransactionDatabase transactionDatabase)
+        {
+            foreach (var transactionDatabaseTransaction in transactionDatabase.Transactions)
+            {
+                TransactionList.Add(transactionDatabaseTransaction);
+            }  
+        }
+
+        public Item Item;
+        public HashSet&lt;Transaction&gt; TransactionList;
+
+
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[11,9,11,34,1],[12,9,12,10,1],[13,13,13,31,1],[14,13,14,58,1],[15,9,15,10,1],[17,9,17,43,1],[18,9,18,10,1],[19,13,19,25,1],[20,13,20,58,1],[21,9,21,10,1],[24,9,24,10,1],[25,13,25,20,1],[25,60,25,92,1],[25,22,25,56,1],[26,13,26,14,1],[27,17,27,69,1],[28,13,28,14,1],[25,57,25,59,1],[29,9,29,10,1]]);
+    </script>
+  </body>
+</html>

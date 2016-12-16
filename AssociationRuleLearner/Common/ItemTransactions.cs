@@ -11,28 +11,25 @@ namespace Common
         public ItemTransactions()
         {
             Item = new Item();
-            TransactionList = new HashSet<int>();
+            TransactionList = new HashSet<Transaction>();
         }
 
         public ItemTransactions(Item item)
         {
             Item = item;
-            TransactionList = new HashSet<int>();
+            TransactionList = new HashSet<Transaction>();
         }
 
         public void GetTransactionsFromDatabase(TransactionDatabase transactionDatabase)
         {
             foreach (var transactionDatabaseTransaction in transactionDatabase.Transactions)
             {
-                if (transactionDatabaseTransaction.Items.Contains(Item))
-                {
-                    TransactionList.Add(transactionDatabaseTransaction.Id);
-                }
+                TransactionList.Add(transactionDatabaseTransaction);
             }  
         }
 
         public Item Item;
-        public HashSet<int> TransactionList;
+        public HashSet<Transaction> TransactionList;
 
 
     }

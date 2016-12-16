@@ -28,7 +28,7 @@ namespace Test
         }
 
         [TestMethod]
-        public void Apriori_Calcuates_Transactions_Support_Right()
+        public void Apriori_Calculates_Transactions_Support_Right()
         {
             var transactions = new TransactionDatabase();
             transactions.AddTransaction(new Transaction("A,B,C,D"));

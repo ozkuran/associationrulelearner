@@ -53,10 +53,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="PerformanceTestAlgorithms.cs" />
+    <Compile Include="UnitTestEclat.cs" />
     <Compile Include="UnitTestApriori.cs" />
     <Compile Include="UnitTestItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestItemList.cs" />
+    <Compile Include="UnitTestItemTransactionList.cs" />
+    <Compile Include="UnitTestItemTransactions.cs" />
     <Compile Include="UnitTestRule.cs" />
     <Compile Include="UnitTestTransaction.cs" />
     <Compile Include="UnitTestTransactionDatabase.cs" />
@@ -70,6 +73,9 @@
       <Project>{7381cf40-36c4-48ca-90ab-d290f4e046a4}</Project>
       <Name>GUI</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

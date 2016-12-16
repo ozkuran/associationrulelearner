@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>D:\GitHub\associationrulelearner\AssociationRuleLearner\Test\PerformanceTestAlgorithms.cs</title>
+    <script type="text/javascript" src="../js/dotcover.sourceview.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/dotcover.report.css" />
+  </head>
+  <body>
+    <pre id="content" class="source-code">
+using System;
+using System.Collections.Generic;
+using Common;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace Test
+{
+    [TestClass]
+    public class PerformanceTestAlgorithms
+    {
+        [TestMethod]
+        public void TestMethodAlgorithms()
+        {
+            List&lt;double&gt; supports = new List&lt;double&gt;(new double[] { 0.001, 0.002, 0.003, 0.004, 0.005, 0.01, 0.02, 0.03, 0.04, 0.05, 0.1, 0.2 });
+            string stringResult = &quot;&quot;;
+            foreach (double support in supports)
+            {
+                var start = DateTime.Now;
+                var transactions = new TransactionDatabase(@&quot;simple.txt&quot;);
+                var apriori = new Apriori(transactions, 0.2);
+                apriori.Run();
+                var end = DateTime.Now;
+                var result = end - start;
+                stringResult += $&quot;APRIORI Support:{support} Total Time (ms): {result.TotalMilliseconds}&quot; + Environment.NewLine;
+            }
+            foreach (double support in supports)
+            {
+                var start = DateTime.Now;
+                var transactions = new TransactionDatabase(@&quot;simple.txt&quot;);
+                var eclat = new Eclat(transactions, 0.2);
+                eclat.Run();
+                var end = DateTime.Now;
+                var result = end - start;
+                stringResult += $&quot;ECLAT Support:{support} Total Time (ms): {result.TotalMilliseconds}&quot; + Environment.NewLine;
+                System.IO.File.WriteAllText(@&quot;PerformanceResults.csv&quot;, stringResult);
+            }
+        }
+    }
+}
+
+    </pre>
+    <script type="text/javascript">
+      highlightRanges([[20,17,20,62,0],[21,17,21,31,0],[22,17,22,40,0],[23,17,23,42,0],[24,17,24,128,0],[25,13,25,14,0],[26,13,26,20,0],[26,40,26,48,0],[26,22,26,36,0],[27,13,27,14,0],[28,17,28,42,0],[29,17,29,75,0],[30,17,30,58,0],[31,17,31,29,0],[32,17,32,40,0],[33,17,33,42,0],[34,17,34,126,0],[35,17,35,86,0],[36,13,36,14,0],[26,37,26,39,0],[37,9,37,10,0],[13,9,13,10,1],[14,13,14,146,1],[15,13,15,38,1],[16,13,16,20,1],[16,40,16,48,1],[16,22,16,36,1],[17,13,17,14,1],[18,17,18,42,1],[19,17,19,75,1],[16,37,16,39,1]]);
+    </script>
+  </body>
+</html>

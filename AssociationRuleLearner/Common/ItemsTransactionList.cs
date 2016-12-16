@@ -14,7 +14,7 @@ namespace Common
             ItemList = new ItemList();
         }
 
-        public ItemsTransactionList(ItemList itemList)
+        public ItemsTransactionList(ItemList itemList) : this()
         {
             foreach (Item item in itemList.Items)
             {
