@@ -55,7 +55,12 @@ namespace Common
                 {
                     ItemsTransactionLists.Add(itemsTransactionList);
                     uniqueItemsTransactionLists.Add(itemsTransactionList);
-                    SupportedTransactionsList.Add(new Transaction(uniqueItem));
+                    var transaction = new Transaction(uniqueItem);
+                    if (CalculateSupport)
+                    {
+                        transaction.Support = TransactionDatabase.GetSupportOfTransaction(transaction);
+                    }
+                    SupportedTransactionsList.Add(transaction);
                 }
             }
 
@@ -103,7 +108,12 @@ namespace Common
                 foreach (ItemsTransactionList tmpItemsTransactionList in candidateTransactions)
                 {
                     ItemsTransactionLists.Add(tmpItemsTransactionList);
-                    SupportedTransactionsList.Add(new Transaction(tmpItemsTransactionList.ItemList));
+                    var transaction = new Transaction(tmpItemsTransactionList.ItemList);
+                    if (CalculateSupport)
+                    {
+                        transaction.Support = TransactionDatabase.GetSupportOfTransaction(transaction);
+                    }
+                    SupportedTransactionsList.Add(transaction);
                 }
                 maxItemCount++;
             }
@@ -202,6 +212,7 @@ namespace Common
             outputString += "Total Transaction Count : " + TransactionDatabase.Transactions.Count + Environment.NewLine;
             outputString += "Unique Item Count : " + TransactionDatabase.UniqueItems.Items.Count + Environment.NewLine;
             outputString += "Supported Transaction Count : " + SupportedTransactionsList.Count + Environment.NewLine;
+            outputString += "Maximum Size of a Supported Transaction : " + SupportedTransactionsList.Max(transaction => transaction.Items.Count) + Environment.NewLine;
             outputString += "---------------------------" + Environment.NewLine;
             //foreach (ItemsTransactionList itemsTransactionList in ItemsTransactionLists)
             //{
@@ -214,7 +225,7 @@ namespace Common
             //}
             foreach (Transaction transaction in SupportedTransactionsList.OrderByDescending(x => x.Items.Count).ThenByDescending(x => x.Support))
             {
-                outputString += $" Support : {TransactionDatabase.GetSupportOfTransaction(transaction):0.00} " + "Transaction : " + transaction.ToString() + Environment.NewLine;
+                outputString += $" Support : {transaction.Support:0.00} " + "Transaction : " + transaction.ToString() + Environment.NewLine;
             }
             return outputString;
         }
