@@ -129,5 +129,31 @@ namespace GUI
                     ((TextBox)sender).SelectAll();
             }
         }
+
+        private void toolStripMenuItemImportTransactionData_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog file = new OpenFileDialog();
+            file.FilterIndex = 2;
+            file.RestoreDirectory = true;
+            file.CheckFileExists = false;
+            file.Title = @"Select Transaction File..";
+
+            string fullFileName = "";
+            string fileName = "";
+
+            if (file.ShowDialog() == DialogResult.OK)
+            {
+                fullFileName = file.FileName;
+                fileName = file.SafeFileName;
+            }
+            File.Copy(fullFileName, AppDomain.CurrentDomain.BaseDirectory + "\\" + fileName,true);
+            applicationConfiguration.DataFiles.Add(fileName);
+            comboBoxTestDataSet.Items.Clear();
+            foreach (var applicationConfigurationDataFile in applicationConfiguration.DataFiles)
+            {
+                comboBoxTestDataSet.Items.Add(applicationConfigurationDataFile);
+            }
+            applicationConfiguration.SaveDataFilesInConfig();
+        }
     }
 }
