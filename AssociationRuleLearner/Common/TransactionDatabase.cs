@@ -18,6 +18,7 @@ namespace Common
 
         public TransactionDatabase(string fileName) : this()
         {
+            fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + fileName);
             LoadTransactionsFromCommaSeperatedFile(fileName);
         }
 
