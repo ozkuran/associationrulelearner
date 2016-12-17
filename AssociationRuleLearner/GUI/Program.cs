@@ -16,7 +16,12 @@ namespace GUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            var mainForm = new MainForm();
+            foreach (string dataFile in mainForm.applicationConfiguration.DataFiles)
+            {
+                mainForm.comboBoxTestDataSet.Items.Add(dataFile);
+            }
+            Application.Run(mainForm);
         }
     }
 }

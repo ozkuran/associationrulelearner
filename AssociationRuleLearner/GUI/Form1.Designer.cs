@@ -245,10 +245,7 @@ namespace GUI
             // comboBoxTestDataSet
             // 
             applicationConfiguration.DataFiles = new List<string>(ConfigurationManager.AppSettings["datafiles"].Split(new char[] { ';' }));
-            foreach (string dataFile in applicationConfiguration.DataFiles)
-            {
-                this.comboBoxTestDataSet.Items.Add(dataFile);
-            }
+
             this.comboBoxTestDataSet.FormattingEnabled = true;
             //this.comboBoxTestDataSet.Items.AddRange(new object[] {
             //"sample.txt",
@@ -367,7 +364,7 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem eCLATAlgorithmToolStripMenuItem;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label labelTestDataSet;
-        private System.Windows.Forms.ComboBox comboBoxTestDataSet;
+        public System.Windows.Forms.ComboBox comboBoxTestDataSet;
         private System.Windows.Forms.Label labelMinimumSupport;
         private System.Windows.Forms.TextBox textBoxMinimumSupport;
         private String csvString;
@@ -385,7 +382,7 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
-        private ApplicationConfiguration applicationConfiguration;
+        public ApplicationConfiguration applicationConfiguration;
     }
 }
 
