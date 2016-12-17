@@ -20,7 +20,10 @@ namespace GUI
         public MainForm()
         {
             InitializeComponent();
+
         }
+
+        private CommandProcessor CommandProcessor;
 
         private void aprioriAlgorithmToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -93,13 +96,38 @@ namespace GUI
 
         private void textBoxCommandTerminal_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == (char)13)
-                textBoxOutput.AppendText("Enter has been pressed" + Environment.NewLine);
+            if (e.KeyChar == (char) 13)
+            {
+                CommandProcessor.Process(textBoxCommandTerminal.Text);
+                e.Handled = true;
+            }
+
         }
 
         private void exportToCSVToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.IO.File.WriteAllText(@"result.csv", csvString);
+        }
+
+        private void textBoxCommandTerminal_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            CommandProcessor = new CommandProcessor();
+            CommandProcessor.ApplicationConfiguration = applicationConfiguration;
+            CommandProcessor.Output = textBoxOutput;
+        }
+
+        private void textBoxOutput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.A)
+            {
+                if (sender != null)
+                    ((TextBox)sender).SelectAll();
+            }
         }
     }
 }

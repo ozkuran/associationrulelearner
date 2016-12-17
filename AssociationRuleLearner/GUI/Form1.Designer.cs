@@ -63,6 +63,12 @@ namespace GUI
             this.labelTestDataSet = new System.Windows.Forms.Label();
             this.exportToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem5 = new System.Windows.Forms.ToolStripSeparator();
+            this.viewHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripSeparator();
+            this.technicalSupportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -222,7 +228,13 @@ namespace GUI
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.aboutToolStripMenuItem});
+            this.toolStripMenuItem5,
+            this.viewHelpToolStripMenuItem,
+            this.toolStripMenuItem6,
+            this.technicalSupportToolStripMenuItem,
+            this.toolStripMenuItem7,
+            this.aboutToolStripMenuItem,
+            this.toolStripMenuItem8});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(61, 29);
             this.helpToolStripMenuItem.Text = "Help";
@@ -253,6 +265,7 @@ namespace GUI
             this.textBoxOutput.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.textBoxOutput.Size = new System.Drawing.Size(1466, 839);
             this.textBoxOutput.TabIndex = 1;
+            this.textBoxOutput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxOutput_KeyDown);
             // 
             // panel2
             // 
@@ -275,6 +288,7 @@ namespace GUI
             this.textBoxCommandTerminal.Name = "textBoxCommandTerminal";
             this.textBoxCommandTerminal.Size = new System.Drawing.Size(1466, 26);
             this.textBoxCommandTerminal.TabIndex = 5;
+            this.textBoxCommandTerminal.TextChanged += new System.EventHandler(this.textBoxCommandTerminal_TextChanged);
             this.textBoxCommandTerminal.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBoxCommandTerminal_KeyPress);
             // 
             // textBoxMinimumSupport
@@ -324,6 +338,40 @@ namespace GUI
             this.toolStripMenuItem4.Name = "toolStripMenuItem4";
             this.toolStripMenuItem4.Size = new System.Drawing.Size(208, 6);
             // 
+            // toolStripMenuItem5
+            // 
+            this.toolStripMenuItem5.Name = "toolStripMenuItem5";
+            this.toolStripMenuItem5.Size = new System.Drawing.Size(233, 6);
+            // 
+            // viewHelpToolStripMenuItem
+            // 
+            this.viewHelpToolStripMenuItem.Enabled = false;
+            this.viewHelpToolStripMenuItem.Name = "viewHelpToolStripMenuItem";
+            this.viewHelpToolStripMenuItem.Size = new System.Drawing.Size(236, 30);
+            this.viewHelpToolStripMenuItem.Text = "View Help";
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(233, 6);
+            // 
+            // technicalSupportToolStripMenuItem
+            // 
+            this.technicalSupportToolStripMenuItem.Enabled = false;
+            this.technicalSupportToolStripMenuItem.Name = "technicalSupportToolStripMenuItem";
+            this.technicalSupportToolStripMenuItem.Size = new System.Drawing.Size(236, 30);
+            this.technicalSupportToolStripMenuItem.Text = "Technical Support";
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(233, 6);
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(233, 6);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -334,6 +382,7 @@ namespace GUI
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "Association Rule Learner";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -380,6 +429,12 @@ namespace GUI
         public ApplicationConfiguration applicationConfiguration;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem4;
         private System.Windows.Forms.ToolStripMenuItem exportToCSVToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem5;
+        private System.Windows.Forms.ToolStripMenuItem viewHelpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem6;
+        private System.Windows.Forms.ToolStripMenuItem technicalSupportToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem7;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem8;
     }
 }
 
