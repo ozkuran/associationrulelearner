@@ -48,7 +48,7 @@ namespace GUI
 
         private void buttonExportToCsv_Click(object sender, EventArgs e)
         {
-            System.IO.File.WriteAllText(@"result.csv", csvString);
+
         }
 
         private void performanceTestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -95,6 +95,11 @@ namespace GUI
         {
             if (e.KeyChar == (char)13)
                 textBoxOutput.AppendText("Enter has been pressed" + Environment.NewLine);
+        }
+
+        private void exportToCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.IO.File.WriteAllText(@"result.csv", csvString);
         }
     }
 }
