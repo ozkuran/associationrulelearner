@@ -40,7 +40,7 @@ namespace Common
             outputString += "Unique Item Count : " + TransactionDatabase.UniqueItems.Items.Count + Environment.NewLine;
             outputString += "Supported Transaction Count : " + SupportedTransactionsList.Count + Environment.NewLine;
             outputString += "---------------------------" + Environment.NewLine;
-            foreach (Transaction transaction in SupportedTransactionsList)
+            foreach (Transaction transaction in SupportedTransactionsList.OrderByDescending(x => x.Items.Count).ThenByDescending(x => x.Support)) 
             {
                 outputString += $" Support : {transaction.Support:0.00} " + "Transaction : " + transaction.ToString() + Environment.NewLine;
             }
