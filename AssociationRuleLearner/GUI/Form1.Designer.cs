@@ -32,6 +32,7 @@ namespace GUI
         /// </summary>
         private void InitializeComponent()
         {
+            applicationConfiguration = new ApplicationConfiguration();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -243,8 +244,8 @@ namespace GUI
             // 
             // comboBoxTestDataSet
             // 
-            var dataFiles = new List<string>(ConfigurationManager.AppSettings["datafiles"].Split(new char[] { ';' }));
-            foreach (string dataFile in dataFiles)
+            applicationConfiguration.DataFiles = new List<string>(ConfigurationManager.AppSettings["datafiles"].Split(new char[] { ';' }));
+            foreach (string dataFile in applicationConfiguration.DataFiles)
             {
                 this.comboBoxTestDataSet.Items.Add(dataFile);
             }
@@ -384,6 +385,7 @@ namespace GUI
         private System.Windows.Forms.ToolStripMenuItem cutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private ApplicationConfiguration applicationConfiguration;
     }
 }
 
