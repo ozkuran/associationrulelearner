@@ -145,15 +145,15 @@ namespace GUI
             {
                 fullFileName = file.FileName;
                 fileName = file.SafeFileName;
+                File.Copy(fullFileName, AppDomain.CurrentDomain.BaseDirectory + "\\" + fileName, true);
+                applicationConfiguration.DataFiles.Add(fileName);
+                comboBoxTestDataSet.Items.Clear();
+                foreach (var applicationConfigurationDataFile in applicationConfiguration.DataFiles)
+                {
+                    comboBoxTestDataSet.Items.Add(applicationConfigurationDataFile);
+                }
+                applicationConfiguration.SaveDataFilesInConfig();
             }
-            File.Copy(fullFileName, AppDomain.CurrentDomain.BaseDirectory + "\\" + fileName,true);
-            applicationConfiguration.DataFiles.Add(fileName);
-            comboBoxTestDataSet.Items.Clear();
-            foreach (var applicationConfigurationDataFile in applicationConfiguration.DataFiles)
-            {
-                comboBoxTestDataSet.Items.Add(applicationConfigurationDataFile);
-            }
-            applicationConfiguration.SaveDataFilesInConfig();
         }
     }
 }

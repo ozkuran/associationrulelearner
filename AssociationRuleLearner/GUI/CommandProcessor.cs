@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Common;
 
 namespace GUI
 {
@@ -87,6 +89,84 @@ namespace GUI
                 {
                     Output.AppendText(datasetNumber + " is not numeric" + Environment.NewLine);
                     Output.AppendText("------------------" + Environment.NewLine);
+                }
+            }
+            else if (input.ToLower().Substring(0, 7) == "apriori")
+            {
+                var parameters = Regex.Match(input.ToLower(), @"\(([^)]*)\)").Groups[1].Value;
+                var dataSet = parameters.Substring(0, parameters.LastIndexOf(","));
+                double support = double.Parse(parameters.Substring(parameters.LastIndexOf(",") + 1 , parameters.Length - parameters.LastIndexOf(",") - 1 ));
+                int intDataSetNumber;
+                bool isNumeric = int.TryParse(dataSet, out intDataSetNumber);
+                string fileName;
+                if (isNumeric)
+                {
+                    fileName = ApplicationConfiguration.DataFiles[intDataSetNumber - 1];
+                }
+                else
+                {
+                    fileName = Regex.Match(parameters, @"\""([^)]*)\""").Groups[1].Value;
+                }
+
+                Output.AppendText("------------------" + Environment.NewLine);
+                if (intDataSetNumber <= ApplicationConfiguration.DataFiles.Count)
+                {
+                    var fullFileName = Application.StartupPath + "\\" + fileName;
+                    if (File.Exists(fullFileName))
+                    {
+                        Output.AppendText("The result of the dataset " + fileName + " are" + Environment.NewLine);
+                        var transactions = new TransactionDatabase(fileName);
+                        var apriori = new Apriori(transactions, support);
+                        apriori.Run();
+                        Output.AppendText(apriori.ToString());
+                    }
+                    else
+                    {
+                        Output.AppendText("The contents of the dataset cannot be found!" + Environment.NewLine);
+                    }
+                }
+                else
+                {
+                    Output.AppendText("Dataset with " + intDataSetNumber + " cannot be found" + Environment.NewLine);
+                }
+            }
+            else if (input.ToLower().Substring(0, 5) == "eclat")
+            {
+                var parameters = Regex.Match(input.ToLower(), @"\(([^)]*)\)").Groups[1].Value;
+                var dataSet = parameters.Substring(0, parameters.LastIndexOf(","));
+                double support = double.Parse(parameters.Substring(parameters.LastIndexOf(",") + 1, parameters.Length - parameters.LastIndexOf(",") - 1));
+                int intDataSetNumber;
+                bool isNumeric = int.TryParse(dataSet, out intDataSetNumber);
+                string fileName;
+                if (isNumeric)
+                {
+                    fileName = ApplicationConfiguration.DataFiles[intDataSetNumber - 1];
+                }
+                else
+                {
+                    fileName = Regex.Match(parameters, @"\""([^)]*)\""").Groups[1].Value;
+                }
+
+                Output.AppendText("------------------" + Environment.NewLine);
+                if (intDataSetNumber <= ApplicationConfiguration.DataFiles.Count)
+                {
+                    var fullFileName = Application.StartupPath + "\\" + fileName;
+                    if (File.Exists(fullFileName))
+                    {
+                        Output.AppendText("The result of the dataset " + fileName + " are" + Environment.NewLine);
+                        var transactions = new TransactionDatabase(fileName);
+                        var eclat = new Eclat(transactions, support);
+                        eclat.Run();
+                        Output.AppendText(eclat.ToString());
+                    }
+                    else
+                    {
+                        Output.AppendText("The contents of the dataset cannot be found!" + Environment.NewLine);
+                    }
+                }
+                else
+                {
+                    Output.AppendText("Dataset with " + intDataSetNumber + " cannot be found" + Environment.NewLine);
                 }
             }
             else
