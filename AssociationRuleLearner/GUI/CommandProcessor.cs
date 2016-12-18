@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,10 +40,27 @@ namespace GUI
                     }
                 }
             }
+            else if (input.ToLower().Substring(0,8) == "listfile")
+            {
+                var fileName = input.ToLower().Substring(9, input.Length - 10);
+                var fullFileName = Application.StartupPath +"\\" + fileName;
+                Output.AppendText("------------------" + Environment.NewLine);
+                if (File.Exists(fullFileName))
+                {
+                    Output.AppendText("The contents of the file " + fileName + " are"  + Environment.NewLine);
+                    Output.AppendText(File.ReadAllText(fullFileName)+Environment.NewLine);
+                }
+                else
+                {
+                    Output.AppendText("File " + fileName + " cannot be found"+Environment.NewLine);
+                }
+                Output.AppendText("------------------" + Environment.NewLine);
+            }
             else
             {
                 Output.AppendText("------------------" + Environment.NewLine);
                 Output.AppendText("Unknown Command" + Environment.NewLine);
+                Output.AppendText("------------------" + Environment.NewLine);
             }
         }
 
