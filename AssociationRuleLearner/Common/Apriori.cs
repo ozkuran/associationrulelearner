@@ -39,11 +39,20 @@ namespace Common
             outputString += "Total Transaction Count : " + TransactionDatabase.Transactions.Count + Environment.NewLine;
             outputString += "Unique Item Count : " + TransactionDatabase.UniqueItems.Items.Count + Environment.NewLine;
             outputString += "Supported Transaction Count : " + SupportedTransactionsList.Count + Environment.NewLine;
-            outputString += "Maximum Size of a Supported Transaction : " + SupportedTransactionsList.Max(transaction => transaction.Items.Count) + Environment.NewLine;
-            outputString += "---------------------------" + Environment.NewLine;
-            foreach (Transaction transaction in SupportedTransactionsList.OrderByDescending(x => x.Items.Count).ThenByDescending(x => x.Support)) 
+            if (SupportedTransactionsList.Count > 0)
             {
-                outputString += $" Support : {transaction.Support:0.00} " + "Transaction : " + transaction.ToString() + Environment.NewLine;
+                outputString += "Maximum Size of a Supported Transaction : " + SupportedTransactionsList.Max(transaction => transaction.Items.Count) + Environment.NewLine;
+                outputString += "---------------------------" + Environment.NewLine;
+                foreach (Transaction transaction in SupportedTransactionsList.OrderByDescending(x => x.Items.Count).ThenByDescending(x => x.Support))
+                {
+                    outputString += $" Support : {transaction.Support:0.00} " + "Transaction : " + transaction.ToString() + Environment.NewLine;
+                }
+            }
+            else
+            {
+                outputString += "Maximum Size of a Supported Transaction : 0"+ Environment.NewLine;
+                outputString += "---------------------------" + Environment.NewLine;
+                outputString += "No association has been found" + Environment.NewLine;
             }
             return outputString;
         }

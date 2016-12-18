@@ -30,7 +30,7 @@ namespace GUI
             var transactions = new TransactionDatabase(comboBoxTestDataSet.Text);
             var apriori = new Apriori(transactions, double.Parse(textBoxMinimumSupport.Text));
             apriori.Run();
-            textBoxOutput.Text = apriori.ToString();
+            textBoxOutput.AppendText(apriori.ToString());
             csvString = apriori.ToCSV();
         }
 
@@ -45,7 +45,7 @@ namespace GUI
             var transactions = new TransactionDatabase(comboBoxTestDataSet.Text);
             var eclat = new Eclat(transactions, double.Parse(textBoxMinimumSupport.Text));
             eclat.Run();
-            textBoxOutput.Text = eclat.ToString();
+            textBoxOutput.AppendText(eclat.ToString());
             csvString = eclat.ToCSV();
         }
 
